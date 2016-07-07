@@ -1,0 +1,40 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #e1e1ea;
+}
+
+.container-fluid{
+	margin-top: 3%;
+	background-color: #e1e1ea;
+}
+h3{
+	border-bottom: 1px solid grey;
+}
+.orange{
+	border-left: 3px solid orange;
+}
+.green{
+	border-left: 3px solid green;
+}
+.violet{
+	border-left: 3px solid  #990099;
+}
+.nopadding {
+   padding: 0 15px !important;
+}
+.list-heading{
+	display: block;
+	padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+#myChart{
+	width:100% !important;
+	height:500px !important;
+}
+canvas{
+	width:100px;
+	height:100px;
+}

@@ -1,43 +1,108 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<!doctype html>
+<html lang="en" ng-app="weatherApp">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="app.css">
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-</head>
-<body>
-  <ul class="menu">
-    <li><a href="#!/view1">view1</a></li>
-    <li><a href="#!/view2">view2</a></li>
-  </ul>
-
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
-
-  <div ng-view></div>
-
-  <div>Angular seed app: v<span app-version></span></div>
-
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
+  <title>Weather Forecast</title>
+  <!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="app.css" />
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="app.js"></script>
-  <script src="view1/view1.js"></script>
-  <script src="view2/view2.js"></script>
-  <script src="components/version/version.js"></script>
-  <script src="components/version/version-directive.js"></script>
-  <script src="components/version/interpolate-filter.js"></script>
+  <script src="additional_data.component.js"></script>
+
+</head>
+<body ng-controller="WeatherController">
+  <div class="container-fluid">
+    <header class="navbar-default navbar-fixed-top">
+      <h6>Weather Forecast</h6>
+    </header>
+    <div class="container">
+
+      <div class="row">
+        <form class="form-inline col-md-12">
+          <label >Select city:</label>
+          <select class="form-control" id="selectCity">
+            <option value="Kyiv">Kyiv</option>
+            <option value="Odesa">Odesa</option>
+            <option value="Lviv">Lviv</option>
+          </select>
+        </form>
+        <div class="col-md-12">
+          <h3>Temperature</h3>
+        </div>
+        <!-- diagram -->
+          <div class="col-md-12">
+            <canvas id="myChart" ></canvas>
+          </div>
+        <!-- diagram -->
+      </div>
+       
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Additional Data</h3>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-group orange">
+          <h4 class="list-heading text-uppercase">weather conditions</h4>
+            <li class="list-group-item nopadding" ng-repeat="speed in speeds">
+              <div class="row weatherList">
+                <div class="col-xs-7"><h4>{{ speed.dt | date: 'MMM d,  hh:mm' }}</h4></div>
+                <div class="col-xs-5"><h4>{{ speed.weather[0].id }}</h4></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-4">
+          <ul class="list-group green">
+          <h4 class="list-heading text-uppercase">humidity</h4>
+            <li class="list-group-item nopadding" ng-repeat="speed in speeds">
+              <div class="row weatherList">
+                <div class="col-xs-7"><h4>{{ speed.dt | date: 'MMM d,  hh:mm' }}</h4></div>
+                <div class="col-xs-5"><h4>{{ speed.main.humidity }}</h4></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- <div class="col-md-4">
+          <ul class="list-group mylist violet" id="wind">
+            <h4 class="list-heading text-uppercase">wind speed</h4>
+            
+          </ul>
+        </div> -->
+         <!--+++-->
+      <div id="somes"></div>
+      <div class="col-md-4">
+          <ul class="list-group violet">
+          <h4 class="list-heading text-uppercase">wind speed</h4>
+            <li class="list-group-item nopadding" ng-repeat="speed in speeds" >
+              <div class="row weatherList">
+                <div class="col-xs-7"><h4>{{ speed.dt | date: 'MMM d,  hh:mm' }}</h4></div>
+                <div class="col-xs-5"><h4>{{ speed.wind.speed }}</h4></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      <!--===-->
+      </div>
+
+    </div>
+  </div>
+
+
+<!-- <script src="scripts.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
 </body>
 </html>
+
+
+
