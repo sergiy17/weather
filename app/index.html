@@ -17,8 +17,9 @@
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="app.js"></script>
-  <script src="additional_data.component.js"></script>
+  <!-- <script src="additional_data.component.js"></script> -->
 
+  
 </head>
 <body ng-controller="WeatherController">
   <div class="container-fluid">
@@ -40,10 +41,12 @@
           <h3>Temperature</h3>
         </div>
         <!-- diagram -->
+        
           <div class="col-md-12">
             <canvas id="myChart" ></canvas>
           </div>
         <!-- diagram -->
+        
       </div>
        
       <div class="row">
@@ -53,54 +56,41 @@
         <div class="col-md-4">
           <ul class="list-group orange">
           <h4 class="list-heading text-uppercase">weather conditions</h4>
-            <li class="list-group-item nopadding" ng-repeat="speed in speeds">
+            <li class="list-group-item nopadding" ng-repeat="datum in Data">
               <div class="row weatherList">
-                <div class="col-xs-7"><h4>{{ speed.dt | date: 'MMM d,  hh:mm' }}</h4></div>
-                <div class="col-xs-5"><h4>{{ speed.weather[0].id }}</h4></div>
+                <div class="col-xs-7"><h4>{{ datum.dt | date: 'MMM d,  hh:mm' }}</h4></div>
+                <div class="col-xs-5"><h4>{{ datum.weather[0].main }}</h4></div>
               </div>
             </li>
           </ul>
         </div>
-
         <div class="col-md-4">
           <ul class="list-group green">
           <h4 class="list-heading text-uppercase">humidity</h4>
-            <li class="list-group-item nopadding" ng-repeat="speed in speeds">
+            <li class="list-group-item nopadding" ng-repeat="datum in Data">
               <div class="row weatherList">
-                <div class="col-xs-7"><h4>{{ speed.dt | date: 'MMM d,  hh:mm' }}</h4></div>
-                <div class="col-xs-5"><h4>{{ speed.main.humidity }}</h4></div>
+                <div class="col-xs-7"><h4>{{ datum.dt | date: 'MMM d,  hh:mm' }}</h4></div>
+                <div class="col-xs-5"><h4>{{ datum.main.humidity }}%</h4></div>
               </div>
             </li>
           </ul>
         </div>
-        <!-- <div class="col-md-4">
-          <ul class="list-group mylist violet" id="wind">
-            <h4 class="list-heading text-uppercase">wind speed</h4>
-            
-          </ul>
-        </div> -->
-         <!--+++-->
-      <div id="somes"></div>
       <div class="col-md-4">
           <ul class="list-group violet">
-          <h4 class="list-heading text-uppercase">wind speed</h4>
-            <li class="list-group-item nopadding" ng-repeat="speed in speeds" >
+            <h4 class="list-heading text-uppercase">wind speed</h4>
+            <li class="list-group-item nopadding" ng-repeat="datum in Data" >
               <div class="row weatherList">
-                <div class="col-xs-7"><h4>{{ speed.dt | date: 'MMM d,  hh:mm' }}</h4></div>
-                <div class="col-xs-5"><h4>{{ speed.wind.speed }}</h4></div>
+                <div class="col-xs-7"><h4>{{ datum.dt | date: 'MMM d,  hh:mm' }}</h4></div>
+                <div class="col-xs-5"><h4>{{ datum.wind.speed }} m/s</h4></div>
               </div>
             </li>
           </ul>
         </div>
-      <!--===-->
       </div>
-
     </div>
   </div>
-
-
-<!-- <script src="scripts.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
+<script src="scripts.js"></script>
 </body>
 </html>
 
