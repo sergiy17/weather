@@ -59,7 +59,7 @@
             <li class="list-group-item nopadding" ng-repeat="datum in Data">
               <div class="row weatherList">
                 <div class="col-xs-7"><h4>{{ datum.dt | date: 'MMM d,  hh:mm' }}</h4></div>
-                <div class="col-xs-5"><h4>{{ datum.weather[0].main }}</h4></div>
+              <div class="col-xs-5"><h4>{{ datum.weather[0].main }}</h4></div>
               </div>
             </li>
           </ul>
@@ -87,6 +87,7 @@
           </ul>
         </div>
       </div>
+
     </div>
   </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
