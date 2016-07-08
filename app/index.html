@@ -18,7 +18,7 @@
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="module.js"></script>
   <script src="app.js"></script>
-  <script src="additional-data.component.js"></script>
+  <script src="data.component.js"></script>
   
 </head>
 <body ng-controller="WeatherController">
@@ -43,13 +43,11 @@
           <h3>Temperature</h3>
         </div>
         <!-- diagram -->
-        
-          <div class="col-md-12">
-            <canvas id="myChart" ></canvas>
-          </div>
+        <diagram></diagram>
+         
         <!-- diagram -->
         </div>
-       <!-- <diagram></diagram> -->
+       
       </div>
        
       <additional-data></additional-data>
