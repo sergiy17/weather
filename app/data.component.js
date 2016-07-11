@@ -1,10 +1,6 @@
 // (function(){
 // 	"use strict";
-	var module = angular.module("weatherApp");
-	module.component("additionalData",{
-		templateUrl:"/additional-data.component.html",
-		controllerAs: "model",
-		controller: function($scope){
+	function requestToApi($scope){
 			var model = this;
 			model.weatherCond = "weather conditions";
 			model.humidity = "humidity";
@@ -74,26 +70,31 @@
   	// $scope.$apply(	);
 	});
 
-		}
+	}
+
+
+	var module = angular.module("weatherApp");
+	module.component("additionalData",{
+		templateUrl:"/additional-data.component.html",
+		controllerAs: "model",
+		controller: requestToApi
 
 	}).component("diagram",{
-		transclude: true,
-		require:{
-			tabsCtrl: '^additionalData'
-		},
+		// transclude: true,
+		// require:{
+		// 	tabsCtrl: '^additionalData'
+		// },
 		controller: function() {
-    	console.log("from diagram controller");
+    	// alert("from diagram controller");
   	},
   	templateUrl: 'diagram.component.html'
   	
 	}).component("navigation",{
-		transclude: true,
-		require:{
-			tabsCtrl: '^additionalData'
-		},
+		// transclude: true,
 		controller: function(){
-			alert("from navigation controller");
+			// alert("from navigation controller");
 		},
 		templateUrl: "navigation.component.html"
 	});
+
 // }());

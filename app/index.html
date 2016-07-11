@@ -20,21 +20,25 @@
   <script src="module.js"></script>
   <script src="app.js"></script>
   <script src="data.component.js"></script>
+  <script src="cities-list.js"></script>
   
 </head>
 <body ng-controller="WeatherController">
   <div class="container-fluid">
     <header class="navbar-default navbar-fixed-top">
       <h6>Weather Forecast</h6>
+      <a href="#/cities-list">Cities-list</a>
     </header>
-    <div class="container">
 
+    <div class="container">
+      <cities-list></cities-list>
       <navigation></navigation>
        
       <additional-data></additional-data>
-
+      
     </div>
   </div>
+  <!-- <ng-view></ng-view> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
 </body>
 </html>
