@@ -86,5 +86,14 @@
   	},
   	templateUrl: 'diagram.component.html'
   	
+	}).component("navigation",{
+		transclude: true,
+		require:{
+			tabsCtrl: '^additionalData'
+		},
+		controller: function(){
+			alert("from navigation controller");
+		},
+		templateUrl: "navigation.component.html"
 	});
 // }());

@@ -13,6 +13,7 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
@@ -28,27 +29,7 @@
     </header>
     <div class="container">
 
-      <div class="row">
-        <form class="form-inline col-md-12">
-          <label >Select city:</label>
-          <select class="form-control" id="selectCity">
-            <option value="Kyiv">Kyiv</option>
-            <option value="Odesa">Odesa</option>
-            <option value="Lviv">Lviv</option>
-          </select>
-        </form>
-        <!--bla-->
-         <div class="row">
-        <div class="col-md-12">
-          <h3>Temperature</h3>
-        </div>
-        <!-- diagram -->
-        <diagram></diagram>
-         
-        <!-- diagram -->
-        </div>
-       
-      </div>
+      <navigation></navigation>
        
       <additional-data></additional-data>
 
