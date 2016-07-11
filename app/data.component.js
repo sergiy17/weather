@@ -21,6 +21,8 @@
 	      });
 	      allData = allData.slice(0,10);
       	$scope.Data = allData;
+      	// console.log(allData);
+      	// console.log(resp.list);
       
       // console.log(allData[0].main.humidity);
       	for(i=0;i<10;i++){

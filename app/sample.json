@@ -1,16 +1,18 @@
-"city": {
-    "id": 696050,
-    "name": "Pushcha-Voditsa",
-    "coord": {
-      "lon": 30.5,
-      "lat": 50.450001
-    },
-    "country": "UA",
-    "population": 0,
-    "sys": {
-      "population": 0
-    }
-  },
-  "cod": "200",
-  "message": 0.0034,
-  "cnt": 38
+{
+	"city": {
+	  "id": 696050,
+	  "name": "Pushcha-Voditsa",
+	  "coord": {
+	    "lon": 30.5,
+	    "lat": 50.450001
+	  },
+	  "country": "UA",
+	  "population": 0,
+	  "sys": {
+	    "population": 0
+	  }
+	},
+	"cod": "200",
+	"message": 0.0034,
+	"cnt": 38
+}
