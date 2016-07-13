@@ -18,6 +18,7 @@
 	      });
 	      allData = allData.slice(0,10);
       	model.Data = allData;
+      	model.cityName = $routeParams.cityName;
       	for(i=0;i<10;i++){
       		var arr4temp = [];
       		arr4temp = Math.round(allData[i].main.temp-273);
@@ -31,7 +32,7 @@
 				  data: {
 				    labels: timeD,
 				    datasets: [{
-				      label: 'Temperature',
+				      label: 'Temperature in '+model.cityName,
 				      data: tempArr,
 				      backgroundColor: 'rgba(54, 162, 235, 1)',
 				      borderColor: 'rgba(54, 162, 235, 1)',
@@ -52,8 +53,8 @@
 				$scope.$apply();
     	}
   	};
-  // console.log($routeParams);
-  xhttp.open("GET", "http://api.openweathermap.org/data/2.5/forecast?id=" + $routeParams.cityId + "&mode=json&appid=0c853911efc43a5ce9db3e839f13abc9", true);
+  console.log($routeParams);
+  xhttp.open("GET", "http://api.openweathermap.org/data/2.5/forecast?q=" + $routeParams.cityName + ",us&mode=json&appid=0c853911efc43a5ce9db3e839f13abc9", true);
   xhttp.send();
 	$('#selectCity').on('change', function () {
 		tempArr = [];

@@ -10,13 +10,12 @@ function controller($http, $routeParams){
 	var model = this;
 	model.arrOfObj = [];
 	model.currentCountry = 0;
-	var arrOfCountries = [];
 	model.$onInit = function(){
 		fetchCities($http).then(function(cities){
 			model.arrOfObj = cities;
-			var arrOfCities = model.arrOfObj.map(function(i){
-				return i.name;
-			});
+			// var arrOfCities = model.arrOfObj.map(function(i){
+			// 	return i.name;
+			// });
 		});
 	};	
 

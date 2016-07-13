@@ -7,7 +7,7 @@
 			// .when("/",{ template: "<cities-list></cities-list>"})
 			.when("/",{ template: "<cities-list></cities-list>" })
 			.when("/more",{ template: "<more-info></more-info>"})
-			.when("/details/:cityId",{ template: "<additional-data></additional-data>"});
+			.when("/details/:cityName",{ template: "<additional-data></additional-data>"});
 			// .otherwise({redirectTo: "/"});
 
 		
