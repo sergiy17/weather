@@ -21,20 +21,28 @@
   <script src="app.js"></script>
   <script src="data.component.js"></script>
   <script src="cities-list.js"></script>
+  <script src="more-info.js"></script>
+  <script src="filter.js"></script>
+  
   
 </head>
 <body ng-controller="WeatherController">
   <div class="container-fluid">
     <header class="navbar-default navbar-fixed-top">
-      <h6>Weather Forecast</h6>
-      <a href="#/cities-list">Cities-list</a>
-    </header>
+      <!-- <h6>Weather Forecast</h6> -->
+      <ul class="nav navbar-nav navbar-left">
+        <li><a href="#/">Home</a></li>
+        <li><a href="#/cities-list">Cities-list</a></li>
+        <li><a href="#/more">More</a></li>
 
+      </ul>
+
+     
+      
+    </header>
     <div class="container">
-      <cities-list></cities-list>
-      <navigation></navigation>
-       
-      <additional-data></additional-data>
+    <ng-view></ng-view>
+      
       
     </div>
   </div>

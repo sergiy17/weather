@@ -5,10 +5,13 @@
 		$routeProvider
 			// .when("/root",{ template: "<root-page></root-page>"});
 			// .when("/",{ template: "<cities-list></cities-list>"})
-			.when("/cities-list",{ template: "<cities-list></cities-list>" })
-			.when("/details",{ template: "<additional-data></additional-data>"});
+			.when("/",{ template: "<cities-list></cities-list>" })
+			.when("/more",{ template: "<more-info></more-info>"})
+			.when("/details/:cityId",{ template: "<additional-data></additional-data>"});
+			// .otherwise({redirectTo: "/"});
+
 		
-			
+			// console.log(cities._id);
 	});
 
 	// module.component("rootPage",{

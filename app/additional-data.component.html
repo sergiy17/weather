@@ -1,3 +1,7 @@
+<!-- <script type="text/javascript">
+  // console.log($routeParams);
+</script> -->
+
 <div class="row">
         <div class="col-md-12">
           <h3>Additional Data</h3>
@@ -5,7 +9,7 @@
       <div class="col-md-4">
 	      <ul class="list-group orange">
 			  <h4 class="list-heading text-uppercase">{{ model.weatherCond }}</h4>
-			    <li class="list-group-item nopadding" ng-repeat="datum in Data">
+			    <li class="list-group-item nopadding" ng-repeat="datum in model.Data">
 			      <div class="row weatherList">
 			        <div class="col-xs-7"><h4>{{ datum.dt | date: 'MMM d,  hh:mm' }}</h4></div>
 			      <div class="col-xs-5"><h4>{{ datum.weather[0].main }}</h4></div>
@@ -17,7 +21,7 @@
         <div class="col-md-4">
           <ul class="list-group green">
           <h4 class="list-heading text-uppercase">{{ model.humidity }}</h4>
-            <li class="list-group-item nopadding" ng-repeat="datum in Data">
+            <li class="list-group-item nopadding" ng-repeat="datum in model.Data">
               <div class="row weatherList">
                 <div class="col-xs-7"><h4>{{ datum.dt | date: 'MMM d,  hh:mm' }}</h4></div>
                 <div class="col-xs-5"><h4>{{ datum.main.humidity }}%</h4></div>
@@ -28,7 +32,7 @@
       <div class="col-md-4">
           <ul class="list-group violet">
             <h4 class="list-heading text-uppercase">{{ model.windSpeed }}</h4>
-            <li class="list-group-item nopadding" ng-repeat="datum in Data" >
+            <li class="list-group-item nopadding" ng-repeat="datum in model.Data" >
               <div class="row weatherList">
                 <div class="col-xs-7"><h4>{{ datum.dt | date: 'MMM d,  hh:mm' }}</h4></div>
                 <div class="col-xs-5"><h4>{{ datum.wind.speed }} m/s</h4></div>

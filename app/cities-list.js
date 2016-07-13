@@ -11,35 +11,26 @@ function fetchCities($http){
 
 function controller($http){
 	var model = this;
-	model.cities = [];
-
+	model.arrOfObj = [];
+	model.currentCountry = 0;
+	var arrOfCountries = [];
 	model.$onInit = function(){
 		fetchCities($http).then(function(cities){
-			model.cities = cities;
-			model.name = cities.name;
-			// model.country = cities.country;
-			// console.log(model.cities); //arr of obj
-			var arrOfCities = model.cities.map(function(i){
+			model.arrOfObj = cities;
+			var arrOfCities = model.arrOfObj.map(function(i){
 				return i.name;
 			});
-			// var arrOfCountr = model.cities.map(function(i){
-			// 	return i.country;
-			// });
-			// console.log(arrOfCities);
-			// console.log(arrOfCountr);
-
-			model.cityNames = arrOfCities;
-			// model.cityCountr = arrOfCountr;
+			// model.countryList = arrOfCountries;
+			// model.cityNames = arrOfCities;
 		});
-		// console.log(model.cities); //empty arr
+	};	
 
-	};
-	// alert("model.cities" );
-	
+
+	$('#selectCountry').on('change', function () {
+	  var selectValCountr = $("#selectCountry option:selected").val();
+	  
+	});
 }
-
-// console.log(arrOfCities); //arr of obj
-// console.log(model.cities);
 
 module.component("citiesList",{
 	templateUrl:"cities-list.html",
@@ -48,9 +39,31 @@ module.component("citiesList",{
 });
 
 
-// allData = resp.list.map(function(i){
-// 	        return i;
-// 	      });
+// function controller($http){
+// 	var model = this;
+// 	model.arrOfObj = [];
+// 	model.currentCountry = 0;
+// 	var arrOfCountries = [];
+// 	model.$onInit = function(){
+// 		fetchCities($http).then(function(cities){
+// 			model.arrOfObj = cities;
+// 			var arrOfCities = model.cities.map(function(i){
+// 				return i.name;
+// 			});
+// 			model.countryList = arrOfCountries;
+// 			model.cityNames = arrOfCities;
+// 		});
+// 	};	
 
 
-// alert(cities);
+// 	$('#selectCountry').on('change', function () {
+// 	  var selectValCountr = $("#selectCountry option:selected").val();
+	  
+// 	});
+// }
+
+// module.component("citiesList",{
+// 	templateUrl:"cities-list.html",
+// 	controllerAs: "model",
+// 	controller: ["$http",controller]
+// });
