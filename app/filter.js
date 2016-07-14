@@ -28,4 +28,4 @@ module.filter('unique', function() {
     }
     return results;
   };
-})
+});

@@ -6,9 +6,8 @@
     <select class="form-control" id="selectCountry" ng-model="model.currentCountry">
       <option value="{{ someObj.country }}" ng-repeat="someObj in model.arrOfObj | unique:'country' ">{{ someObj.country }}</option>
     </select>
-
-    <!-- collection | unique: 'property' -->
   </form>
+  
   <h3>{{ model.currentCountry }}</h3>
   </div>
   <ul>

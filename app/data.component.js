@@ -1,95 +1,65 @@
-// (function(){
-// 	"use strict";
-	function requestToApi($scope, $routeParams){
-			var model = this;
-			model.weatherCond = "weather conditions";
-			model.humidity = "humidity";
-			model.windSpeed = "wind speed";
-			var allData;
-			var tempArr = [];
-			var someData;
-			var xhttp = new XMLHttpRequest();
-
-  	xhttp.onreadystatechange = function() {
-	    if (xhttp.readyState == 4 && xhttp.status == 200) {
-	      var resp = JSON.parse(xhttp.responseText);
-	      model.cityName = resp.city.name;
-	      // console.log(resp.city.name);
-	      allData = resp.list.map(function(i){
-	        return i;
-	      });
-	      allData = allData.slice(0,10);
-      	model.Data = allData;
-      	for(i=0;i<10;i++){
-      		var arr4temp = [];
-      		arr4temp = Math.round(allData[i].main.temp-273);
-      		tempArr.push(arr4temp);
-      	}
-    		var ctx = document.getElementById("myChart");
-				var timeD = ["May 11 00:00","May 11 03:00","May 11 06:00","May 11 09:00","May 11 12:00","May 11 15:00","May 11 18:00","May 11 21:00","May 12 00:00","May 12 03:00"];
-					var temperature = [20,26,18,16,18,22,25,29,28,28];
-				var myChart = new Chart(ctx, {
-				  type: 'bar',
-				  data: {
-				    labels: timeD,
-				    datasets: [{
-				      label: 'Temperature for '+model.cityName,
-				      data: tempArr,
-				      backgroundColor: 'rgba(54, 162, 235, 1)',
-				      borderColor: 'rgba(54, 162, 235, 1)',
-				      borderWidth: 1
-				    }]
-				  },
-				  options: {
-				    scales: {
-				      yAxes: [{
-				        ticks: {
-				          beginAtZero:true
-				        }
-				      }]
-				    }
-				  }
-				});
-      	
-				$scope.$apply();
+function requestToApi($scope, $routeParams, serverSrvc){
+		var model = this;
+		model.weatherCond = "weather conditions";
+		model.humidity = "humidity";
+		model.windSpeed = "wind speed";
+		var allData;
+		var tempArr = [];
+		
+  	var promice = serverSrvc.getData();
+  	promice.then(function(data){
+  		$scope.respData = data;
+      model.cityName = $scope.respData.city.name;
+      allData = $scope.respData.list.map(function(i){
+        return i;
+      });
+      allData = allData.slice(0,10);
+    	model.Data = allData;
+    	for(i=0;i<10;i++){
+    		var arr4temp = [];
+    		arr4temp = Math.round(allData[i].main.temp-273);
+    		tempArr.push(arr4temp);
     	}
-  	};
-  // console.log($routeParams);
-  xhttp.open("GET", "http://api.openweathermap.org/data/2.5/forecast?id=" + $routeParams.cityId + "&mode=json&appid=0c853911efc43a5ce9db3e839f13abc9", true);
-  xhttp.send();
-	$('#selectCity').on('change', function () {
-		tempArr = [];
-	  var selectVal = $("#selectCity option:selected").val();
-	  xhttp.open("GET", "http://api.openweathermap.org/data/2.5/forecast?q=" + selectVal + ",us&mode=json&appid=0c853911efc43a5ce9db3e839f13abc9", true);
-  	xhttp.send();
-  	// $scope.$apply(	);
-	});
+  		var ctx = document.getElementById("myChart");
+			var timeD = ["May 11 00:00","May 11 03:00","May 11 06:00","May 11 09:00","May 11 12:00","May 11 15:00","May 11 18:00","May 11 21:00","May 12 00:00","May 12 03:00"];
+				var temperature = [20,26,18,16,18,22,25,29,28,28];
+			var myChart = new Chart(ctx, {
+			  type: 'bar',
+			  data: {
+			    labels: timeD,
+			    datasets: [{
+			      label: 'Temperature for '+model.cityName,
+			      data: tempArr,
+			      backgroundColor: 'rgba(54, 162, 235, 1)',
+			      borderColor: 'rgba(54, 162, 235, 1)',
+			      borderWidth: 1
+			    }]
+			  },
+			  options: {
+			    scales: {
+			      yAxes: [{
+			        ticks: {
+			          beginAtZero:true
+			        }
+			      }]
+			    }
+			  }
+			});
+		});
+	};
+var module = angular.module("weatherLib");
+module.component("additionalData",{
+	templateUrl:"/additional-data.component.html",
+	controllerAs: "model",
+	controller: ["$scope","$routeParams","serverSrvc",requestToApi]
 
-	}
-
-
-	var module = angular.module("weatherApp");
-	module.component("additionalData",{
-		templateUrl:"/additional-data.component.html",
-		controllerAs: "model",
-		controller: requestToApi
-
-	}).component("diagram",{
-		// transclude: true,
-		// require:{
-		// 	tabsCtrl: '^additionalData'
-		// },
-		controller: function() {
-    	// alert("from diagram controller");
-  	},
-  	templateUrl: 'diagram.component.html'
-  	
-	}).component("navigation",{
-		// transclude: true,
-		controller: function(){
-			// alert("from navigation controller");
-		},
-		templateUrl: "navigation.component.html"
-	});
-
-// }());
+}).component("diagram",{
+	controller: function() {
+	},
+	templateUrl: 'diagram.component.html'
+	
+}).component("navigation",{
+	controller: function(){
+	},
+	templateUrl: "navigation.component.html"
+});

@@ -17,34 +17,26 @@
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="module.js"></script>
   <script src="app.js"></script>
   <script src="data.component.js"></script>
   <script src="cities-list.js"></script>
   <script src="more-info.js"></script>
   <script src="filter.js"></script>
-  
+  <script src="server/serverFctr.js"></script>
+  <script src="module.js"></script>
   
 </head>
 <body ng-controller="WeatherController">
   <div class="container-fluid">
     <header class="navbar-default navbar-fixed-top">
       <h6>Weather Forecast <a href="#/">Home</a></h6>
-      
-
-     
-      
     </header>
     <div class="container">
-    <ng-view></ng-view>
-      
+
+      <ng-view></ng-view>
       
     </div>
   </div>
-  <!-- <ng-view></ng-view> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
 </body>
 </html>
-
-
-

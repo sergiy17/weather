@@ -1,11 +1,11 @@
-var module = angular.module('weatherApp');
+// var module = angular.module('weatherLib');
 
-function controller(){
+// function controller(){
 	
-}
+// }
 
-module.component("moreInfo",{
-	templateUrl:"more-info.html",
-	controllerAs: "model",
-	controller: controller
-});
+// module.component("moreInfo",{
+// 	templateUrl:"more-info.html",
+// 	controllerAs: "model",
+// 	controller: controller
+// });
