@@ -16,14 +16,13 @@ function requestToApi($scope, $routeParams, serverSrvc){
       });
       
       allData = allData.slice(0,10);
-    	model.Data = allData;
-
-    	console.log(data.list[0].dt_txt);
+      model.Data = allData;
     	for(var i=0;i<10;i++){
     		var a = data.list[i].dt_txt;
     		a = a.slice(11,16);
     		timeArr.push(a);
     	}
+
     	timeArr.slice(0,10);
 
     	for(var i=0;i<10;i++){
