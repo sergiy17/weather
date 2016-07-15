@@ -19,7 +19,7 @@
     <h4 class="list-heading text-uppercase">{{ model.humidity }}</h4>
       <li class="list-group-item nopadding" ng-repeat="datum in model.Data">
         <div class="row weatherList">
-          <div class="col-xs-7"><h4>{{ datum.dt | date: 'MMM d,  hh:mm' }}</h4></div>
+          <div class="col-xs-7"><h4>{{ datum.dt_txt }}</h4></div>
           <div class="col-xs-5"><h4>{{ datum.main.humidity }}%</h4></div>
         </div>
       </li>
@@ -30,7 +30,7 @@
       <h4 class="list-heading text-uppercase">{{ model.windSpeed }}</h4>
       <li class="list-group-item nopadding" ng-repeat="datum in model.Data" >
         <div class="row weatherList">
-          <div class="col-xs-7"><h4>{{ datum.dt | date: 'MMM d,  hh:mm' }}</h4></div>
+          <div class="col-xs-7"><h4>{{ datum.dt_txt}}</h4></div>
           <div class="col-xs-5"><h4>{{ datum.wind.speed }} m/s</h4></div>
         </div>
       </li>

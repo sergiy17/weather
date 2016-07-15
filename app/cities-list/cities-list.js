@@ -10,7 +10,7 @@ function controller($http, $routeParams){
 
 	var model = this;
 	model.arrOfObj = [];
-	model.currentCountry = 0;
+	model.currentCountry = 'UA';
 	model.$onInit = function(){
 		fetchCities($http).then(function(cities){
 			model.arrOfObj = cities;
@@ -24,7 +24,7 @@ function controller($http, $routeParams){
 }
 
 module.component("citiesList",{
-	templateUrl:"cities-list.html",
+	templateUrl:"cities-list/cities-list.html",
 	controllerAs: "model",
 	controller: ["$http",controller]
 });
