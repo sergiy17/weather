@@ -1,4 +1,6 @@
 function requestToApi($scope, $routeParams, serverSrvc){
+		
+		// console.log(location);
 		var model = this;
 		model.weatherCond = "weather conditions";
 		model.humidity = "humidity";
@@ -10,11 +12,12 @@ function requestToApi($scope, $routeParams, serverSrvc){
   	var promice = serverSrvc.getData();
   	promice.then(function(data){
   		$scope.respData = data;
+  		// console.log(data);
       model.cityName = $scope.respData.city.name;
       allData = $scope.respData.list.map(function(i){
         return i;
       });
-      
+      // console.log(1);
       allData = allData.slice(0,10);
       model.Data = allData;
     	for(var i=0;i<10;i++){

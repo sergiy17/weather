@@ -1,24 +1,20 @@
-var routerApp = angular.module('weatherApp', ['ui.router', 'weatherLib']);
+var routerApp = angular.module('weatherApp', ['ngRoute','ui.router', 'weatherLib']);
 
-routerApp.config(function($stateProvider, $urlRouterProvider) {
+routerApp.config(function($routeProvider,$stateProvider, $urlRouterProvider) {
     
-    // $urlRouterProvider.otherwise('/info');
+    $urlRouterProvider.otherwise('/');
     
     $stateProvider
         
         // HOME STATES AND NESTED VIEWS ========================================
-        .state('info', {
-            url: '/info',
-            template: 'partial-about.html'
+        .state('/details/:cityId', {
+            url: '/details/:cityId',
+            template: '<additional-data></additional-data>'
         })
         .state('/',{
             url: '/',
-            templateUrl: 'cities-list/cities-list.html'
-        })
-
-        // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
-        .state('about', {
-            // we'll get to this in a bit       
+            //templateUrl: 'cities-list/cities-list.html'
+            template: '<cities-list></cities-list>'
         });
         
 });
