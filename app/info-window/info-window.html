@@ -1,1 +1,18 @@
-<h3>info-window</h3>
+<div class="row">
+	<div class="container-fluid col-md-12">
+		<div class="info-window">
+			<ul class="list-inline">
+				<li><a ui-sref=".now">Now</a></li>
+				<li><a ui-sref=".daily">Daily</a></li>
+				<li><a ui-sref=".hourly">Hourly</a></li>
+				<li><a href="details/{{model.cityId + '/morning'}}">Morning</a></li>
+				<li><a href="details/{{model.cityId + '/afternoon'}}">Afternoon</a></li>
+				<li><a href="details/{{model.cityId + '/evening'}}">Evening</a></li>
+				<li><a href="details/{{model.cityId + '/overnight'}}">Overnight</a></li>
+			</ul>
+			<p>{{ $scope.name }}</p>
+			{{ model.text }}
+			<div ui-view></div>
+		</div>
+	</div>
+</div>
