@@ -1,4 +1,4 @@
-function requestToApi($scope, $routeParams, serverSrvc){
+function requestToApi($scope, $stateParams, serverSrvc){
 		
 		// console.log(location);
 		var model = this;
@@ -61,12 +61,13 @@ function requestToApi($scope, $routeParams, serverSrvc){
 			  }
 			});
 		});
+		// console.log($scope.respData);
 	};
 var module = angular.module("weatherLib");
 module.component("additionalData",{
 	templateUrl:"/additional-data.component.html",
 	controllerAs: "model",
-	controller: ["$scope","$routeParams","serverSrvc",requestToApi]
+	controller: ["$scope","$stateParams","serverSrvc",requestToApi]
 
 }).component("diagram",{
 	controller: function() {

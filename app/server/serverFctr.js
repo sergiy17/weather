@@ -1,5 +1,5 @@
 var module = angular.module("weatherLib");
-module.service("serverSrvc",["$q", '$routeParams', function($q, $routeParams){
+module.service("serverSrvc",["$q", '$stateParams', function($q, $stateParams){
 	return {
 		getData : function(){
 			var promice = $q.defer();
@@ -12,7 +12,7 @@ module.service("serverSrvc",["$q", '$routeParams', function($q, $routeParams){
 				}
 				// console.log(1);
 			}
-			xhttp.open("GET", "http://api.openweathermap.org/data/2.5/forecast?id=" + $routeParams.cityId + "&mode=json&appid=0c853911efc43a5ce9db3e839f13abc9", true);
+			xhttp.open("GET", "http://api.openweathermap.org/data/2.5/forecast?id=" + $stateParams.cityId + "&mode=json&appid=0c853911efc43a5ce9db3e839f13abc9", true);
 			xhttp.send();
 			return promice.promise;
 		}
