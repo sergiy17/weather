@@ -1,8 +1,8 @@
 var routerApp = angular.module('weatherApp', ['ngRoute','ui.router', 'weatherLib']);
-
-routerApp.config(function($routeProvider,$stateProvider, $urlRouterProvider) {
+routerApp.
+  config(function($routeProvider,$stateProvider, $urlRouterProvider) {
     
-  // $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/');
   
   $stateProvider
       // HOME STATES AND NESTED VIEWS ========================================
@@ -18,6 +18,7 @@ routerApp.config(function($routeProvider,$stateProvider, $urlRouterProvider) {
     .state("/details/:cityId.now",{
       url: "/now",
       templateUrl: "partials/partial-now.html"
+      
     })
     .state('/details/:cityId.daily', {
       url: '/daily',
