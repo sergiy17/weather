@@ -5,10 +5,10 @@
 				<li><a ui-sref=".now">Now</a></li>
 				<li><a ui-sref=".daily">Daily</a></li>
 				<li><a ui-sref=".hourly">Hourly</a></li>
-				<li><a href="details/{{model.cityId + '/morning'}}">Morning</a></li>
-				<li><a href="details/{{model.cityId + '/afternoon'}}">Afternoon</a></li>
-				<li><a href="details/{{model.cityId + '/evening'}}">Evening</a></li>
-				<li><a href="details/{{model.cityId + '/overnight'}}">Overnight</a></li>
+				<li><a ui-sref=".morning">Morning</a></li>
+				<li><a ui-sref=".afternoon">Afternoon</a></li>
+				<li><a ui-sref=".evening">Evening</a></li>
+				<li><a ui-sref=".overnight">Overnight</a></li>
 			</ul>
 			<p>{{ $scope.name }}</p>
 			{{ model.text }}
