@@ -7,7 +7,6 @@ function fetchCities($http){
 }
 
 function controller($http, $routeParams){
-
 	var model = this;
 	model.arrOfObj = [];
 	model.currentCountry = 'UA';
@@ -16,11 +15,6 @@ function controller($http, $routeParams){
 			model.arrOfObj = cities;
 		});
 	};	
-
-	$('#selectCountry').on('change', function () {
-	  var selectValCountr = $("#selectCountry option:selected").val();
-	  
-	});
 }
 
 module.component("citiesList",{

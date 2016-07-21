@@ -8,14 +8,13 @@ function requestToApi($scope, $stateParams, serverSrvc){
 	var tempArr = [];
 	var timeArr = [];
 		
-	var promice = serverSrvc.getData();
-	promice.then(function(data){
+	var promise = serverSrvc.getData();
+		promise.then(function(data){
 		$scope.respData = data;
     model.cityName = $scope.respData.city.name;
     allData = $scope.respData.list.map(function(i){
       return i;
     });
-    // console.log(1);
     allData = allData.slice(0,10);
     model.Data = allData;
   	for(var i=0;i<10;i++){
@@ -34,7 +33,6 @@ function requestToApi($scope, $stateParams, serverSrvc){
 
 		var ctx = document.getElementById("myChart");
 		var timeD = timeArr;
-		// var temperature = [20,26,18,16,18,22,25,29,28,28];
 		var myChart = new Chart(ctx, {
 		  type: 'bar',
 		  data: {
