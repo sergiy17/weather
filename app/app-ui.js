@@ -1,4 +1,4 @@
-var routerApp = angular.module('weatherApp', ['ngRoute','ui.router', 'weatherLib']);
+var routerApp = angular.module('weatherApp', ['ngRoute','ui.router', 'weatherLib','weatherCity']);
 routerApp.
   config(function($routeProvider,$stateProvider, $urlRouterProvider) {
     
