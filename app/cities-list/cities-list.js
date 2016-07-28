@@ -1,4 +1,4 @@
-var module = angular.module('weatherCity',['ngSanitize', 'MassAutoComplete']);
+var module = angular.module('weatherCity',['ngSanitize', 'MassAutoComplete', 'ui.router']);
 
 function fetchCities($http){
 	return $http.get("/json-city-list/city.list.UA.json").then(function(response){
@@ -6,10 +6,17 @@ function fetchCities($http){
 	});
 }
 
-function controller($http, $scope, $routeParams, $location){
+function controller($http, $scope, $state, $timeout){
 	var model = this;
+    
 	$scope.currentCity;
 	$scope.dirty = {};
+   
+   
+    $scope.goToCity = function(cityId){
+            console.log('inside goToCity');
+            $state.go('/details/:cityId', {'cityId': cityId });
+    }
 	model.arrOfObj = [];
 	model.currentCountry = 'UA';
 	model.$onInit = function(){
@@ -20,12 +27,9 @@ function controller($http, $scope, $routeParams, $location){
 // +++++++++++++++++++++++++++++++++++
 	function redirect(selected_item){
 		$scope.currentCity = selected_item.value;
-			// $location.path("/details/"+selected_item.value,false);
+            console.log($state.get());
+            $scope.goToCity($scope.currentCity);
 	};
-
-	$scope.$watch('currentCity', function(arg){
-		$location.path("/details/"+arg);
-	});
 
   function suggest_city(term) {
 	  var q = term.toLowerCase().trim();
@@ -50,5 +54,5 @@ function controller($http, $scope, $routeParams, $location){
 module.component("citiesList",{
 	templateUrl:"cities-list/cities-list.html",
 	controllerAs: "model",
-	controller: ["$http","$scope","$location",controller]
+	controller: ["$http","$scope","$state","$timeout", controller]
 });
