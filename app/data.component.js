@@ -56,7 +56,6 @@ function requestToApi($scope, $stateParams, serverSrvc){
 		  }
 		});
 	});
-		//$scope.$apply();
 };
 var module = angular.module("weatherLib");
 module.component("additionalData",{
