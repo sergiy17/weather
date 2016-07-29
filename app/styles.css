@@ -41,3 +41,12 @@ canvas{
 .ac-menu{
 	background-color: white;
 }
+.myClass{
+	background-color: red;
+}
+#myUl{
+	background-color: red;
+}
+.cities-list{
+	text-align: center;
+}
