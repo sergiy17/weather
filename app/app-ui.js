@@ -5,13 +5,17 @@ routerApp.
   $urlRouterProvider.otherwise('/');
   
   $stateProvider
-    .state('/details/:cityId', {
-      url: '/details/:cityId',
-      template: '<additional-data></additional-data>'
-    })
     .state('/',{
       url: '/',
       template: '<cities-list></cities-list>'
+    })
+    .state('details',{
+      url: '/details?lat&lon',
+      template: '<additional-data></additional-data>'
+    })
+    .state('/details/:cityId', {
+      url: '/details/:cityId',
+      template: '<additional-data></additional-data>'
     })
     .state("/details/:cityId.now",{
       url: "/now",

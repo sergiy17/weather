@@ -5,23 +5,26 @@ function fetchCities($http){
 		return response.data;
 	});
 }
-getWeatherVar = 0;
-function controller($http, $scope, $state, $timeout, geoLocSrvc){
+function controller($http, $scope, $state, $timeout){
 	var model = this;
 	$scope.currentCity;
 	$scope.dirty = {};
 	// Redirects to details & city which was selected
 	$scope.goToCity = function(cityId){
 		$state.go('/details/:cityId', {'cityId': cityId });
+		console.log(cityId);
+	};
+	var lat = 0;
+	var lon = 0;
+	//'gpsCity' <= takes our cordinates
+	model.gpsCity = function(){
+		navigator.geolocation.getCurrentPosition(function(position) {
+	  	lat = position.coords.latitude;
+	  	lon = position.coords.longitude;
+			$state.go('details', {'lat': lat,'lon':lon});
+		});
 	};
 
-	$( "#getWeather" ).click(function() {
-  	getWeatherVar = 1;
-  	console.log(getWeatherVar);
-	});
-	
-	console.log(getWeatherVar);
-	model.getLocation = geoLocSrvc.getLocation
 	model.arrOfObj = [];
 	model.currentCountry = 'UA';
 	model.$onInit = function(){
@@ -63,5 +66,5 @@ function controller($http, $scope, $state, $timeout, geoLocSrvc){
 module.component("citiesList",{
 	templateUrl:"cities-list/cities-list.html",
 	controllerAs: "model",
-	controller: ["$http","$scope","$state","$timeout","geoLocSrvc", controller]
+	controller: ["$http","$scope","$state","$timeout", controller]
 });
