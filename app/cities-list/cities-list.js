@@ -5,7 +5,8 @@ function fetchCities($http){
 		return response.data;
 	});
 }
-function controller($http, $scope, $state, $timeout){
+getWeatherVar = 0;
+function controller($http, $scope, $state, $timeout, geoLocSrvc){
 	var model = this;
 	$scope.currentCity;
 	$scope.dirty = {};
@@ -14,6 +15,13 @@ function controller($http, $scope, $state, $timeout){
 		$state.go('/details/:cityId', {'cityId': cityId });
 	};
 
+	$( "#getWeather" ).click(function() {
+  	getWeatherVar = 1;
+  	console.log(getWeatherVar);
+	});
+	
+	console.log(getWeatherVar);
+	model.getLocation = geoLocSrvc.getLocation
 	model.arrOfObj = [];
 	model.currentCountry = 'UA';
 	model.$onInit = function(){
@@ -55,5 +63,5 @@ function controller($http, $scope, $state, $timeout){
 module.component("citiesList",{
 	templateUrl:"cities-list/cities-list.html",
 	controllerAs: "model",
-	controller: ["$http","$scope","$state","$timeout", controller]
+	controller: ["$http","$scope","$state","$timeout","geoLocSrvc", controller]
 });

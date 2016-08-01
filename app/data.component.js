@@ -1,4 +1,4 @@
-function requestToApi($scope, $stateParams, serverSrvc){
+function requestToApi($scope, $stateParams, serverSrvc, geoLocSrvc){
 		
 	var model = this;
 	model.weatherCond = "weather conditions";
@@ -8,7 +8,23 @@ function requestToApi($scope, $stateParams, serverSrvc){
 	var tempArr = [];
 	var timeArr = [];
 		
+
+	
+	if(getWeatherVar == 0){
+		var promise = serverSrvc.getData();
+	}else if(getWeatherVar == 1){
+		var promise = geoLocSrvc.getLocation();
+	}
+	else{
+		alert("Error");
+	}
+
+	
 	var promise = serverSrvc.getData();
+	console.log(promise);
+
+
+
 		promise.then(function(data){
 		$scope.respData = data;
     model.cityName = $scope.respData.city.name;
@@ -61,7 +77,7 @@ var module = angular.module("weatherLib");
 module.component("additionalData",{
 	templateUrl:"/additional-data.component.html",
 	controllerAs: "model",
-	controller: ["$scope","$stateParams","serverSrvc",requestToApi]
+	controller: ["$scope","$stateParams","serverSrvc","geoLocSrvc",requestToApi]
 
 }).component("diagram",{
 	controller: function() {
