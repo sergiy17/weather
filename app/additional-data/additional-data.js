@@ -59,7 +59,7 @@ function requestToApi($scope, serverSrvc){
 };
 var module = angular.module("weatherLib");
 module.component("additionalData",{
-	templateUrl:"/additional-data.component.html",
+	templateUrl:"additional-data/additional-data.html",
 	controllerAs: "model",
 	controller: ["$scope","serverSrvc",requestToApi]
 
