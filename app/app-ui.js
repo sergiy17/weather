@@ -1,6 +1,6 @@
 var routerApp = angular.module('weatherApp', ['ngRoute','ui.router', 'weatherLib','weatherCity']);
 routerApp.
-  config(function($routeProvider,$stateProvider, $urlRouterProvider) {
+  config(function($routeProvider,$stateProvider, $urlRouterProvider, $provide) {
     
   $urlRouterProvider.otherwise('/');
   
@@ -76,4 +76,11 @@ routerApp.
       url:"/overnight",
       templateUrl:"partials/partial-overnight.html"
     });// for cityId
+
+  $provide.decorator('$uiViewScroll', function ($delegate) {
+    return function (uiViewElement) {
+      var top = uiViewElement.getBoundingClientRect().top;
+      window.scrollTo(0, (top - 30));
+    }; 
+  });
 });
