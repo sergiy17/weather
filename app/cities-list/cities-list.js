@@ -12,7 +12,6 @@ function controller($http, $scope, $state, $timeout){
 	// Redirects to details & city which was selected
 	$scope.goToCity = function(cityId){
 		$state.go('/details/:cityId', {'cityId': cityId });
-		console.log(cityId);
 	};
 	var lat = 0;
 	var lon = 0;
