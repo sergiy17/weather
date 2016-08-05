@@ -3,7 +3,7 @@ var infoModule = angular.module('weatherLib');
 controller = function($scope, $stateParams,functionsSrvc){
 	var model = this;
 
-	 setData = function(data){S
+	 setData = function(data){
 		var arr4Temp = [];
 		for(var i=0;i<10;i++){
 			arr4Temp.push(Math.round(functionsSrvc.kelvinToCelsius(data.list[i].main.temp)));
