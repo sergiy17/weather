@@ -2,6 +2,7 @@ var module = angular.module("weatherLib");
 module.service("serverSrvc",["$q", '$stateParams', function($q, $stateParams){
 	return {
 		getData : function(){
+			console.log('server service');
 			var promise = $q.defer();
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function(){

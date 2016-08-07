@@ -1,5 +1,5 @@
 function requestToApi($scope, serverSrvc){
-	
+	console.log('form requestToApi');
 	var model = this;
 	model.weatherCond = "weather conditions";
 	model.humidity = "humidity";
