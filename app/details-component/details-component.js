@@ -28,7 +28,6 @@ function requestToApi($scope, serverSrvc, $stateParams,$q){
 		// var promise = serverSrvc.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId);
 		promise = serverSrvc.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId).then(function(data){parseData(data)});;
 		});
-		
 	}
 	// if we have cityId
 	else {
@@ -87,8 +86,8 @@ function requestToApi($scope, serverSrvc, $stateParams,$q){
 	};
 };
 var module = angular.module("weatherLib");
-module.component("additionalData",{
-	templateUrl:"additional-data/additional-data.html",
+module.component("detailsComponent",{
+	templateUrl:"details-component/details-component.html",
 	controllerAs: "model",
 	controller: ["$scope","serverSrvc","$stateParams","$q",requestToApi]
 

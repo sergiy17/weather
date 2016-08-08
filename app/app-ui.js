@@ -7,7 +7,7 @@ routerApp.
   $stateProvider
     .state('/',{
       url: '/',
-      template: '<additional-data></additional-data>'
+      template: '<details-component></details-component>'
     })
     .state('/cities-list',{
       url: '/cities-list/',
@@ -16,7 +16,7 @@ routerApp.
     // for GPS
     .state('details',{
       url: '/details?lat&lon',
-      template: '<additional-data></additional-data>'
+      template: '<details-component></details-component>'
     })
     .state("details.now",{
       url: "/now",
@@ -50,7 +50,7 @@ routerApp.
     // for cityId
     .state('/details/:cityId', {
       url: '/details/:cityId',
-      template: '<additional-data></additional-data>'
+      template: '<details-component></details-component>'
     })
     .state("/details/:cityId.now",{
       url: "/now",

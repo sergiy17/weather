@@ -10,7 +10,6 @@ module.service("serverSrvc",["$q", function($q){
 					promise.resolve(resp);
 				}
 			}
-			console.log(lon);
 			if(cityId){
 				xhttp.open("GET", "http://api.openweathermap.org/data/2.5/forecast?id=" + cityId + "&mode=json&appid=0c853911efc43a5ce9db3e839f13abc9", true);
 				xhttp.send();
