@@ -21,17 +21,13 @@ function controller($http, $scope, $state, $timeout){
 	  	lat = position.coords.latitude;
 	  	lon = position.coords.longitude;
 			$state.go('details', {'lat': lat,'lon':lon});
+			console.log(lon);
 		});
 	};
 
 	model.arrOfObj = [];
 	model.currentCountry = 'UA';
 	model.$onInit = function(){
-		navigator.geolocation.getCurrentPosition(function(position) {
-	  	lat = position.coords.latitude;
-	  	lon = position.coords.longitude;
-			// $state.go('details', {'lat': lat,'lon':lon});
-		});
 		fetchCities($http).then(function(cities){
 			model.arrOfObj = cities;
 		});

@@ -7,8 +7,8 @@ routerApp.
   $stateProvider
     .state('/',{
       url: '/',
-      template: '<additional-data></additional-data>'
-      // template: '<cities-list></cities-list>'
+      // template: '<additional-data></additional-data>'
+      template: '<cities-list></cities-list>'
     })
     // for GPS
     .state('details',{

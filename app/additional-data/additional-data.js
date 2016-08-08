@@ -1,15 +1,14 @@
-function requestToApi($scope, serverSrvc){
-	console.log('form requestToApi');
+function requestToApi($scope, serverSrvc, $stateParams){
+
 	var model = this;
 	model.weatherCond = "weather conditions";
 	model.humidity = "humidity";
 	model.windSpeed = "wind speed";
 	var allData;
-
 	var tempArr = [];
 	var timeArr = [];
-		
-	var promise = serverSrvc.getData();
+	
+	var promise = serverSrvc.getData($stateParams.lat, $stateParams.lon, $stateParams.cityId);
 	promise.then(function(data){
 	$scope.respData = data;
 	model.respData = data;
@@ -65,7 +64,7 @@ var module = angular.module("weatherLib");
 module.component("additionalData",{
 	templateUrl:"additional-data/additional-data.html",
 	controllerAs: "model",
-	controller: ["$scope","serverSrvc",requestToApi]
+	controller: ["$scope","serverSrvc","$stateParams",requestToApi]
 
 }).component("diagram",{
 	controller: function() {
