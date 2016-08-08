@@ -1,15 +1,41 @@
-function requestToApi($scope, serverSrvc, $stateParams){
-
+function requestToApi($scope, serverSrvc, $stateParams,$q){
 	var model = this;
 	model.weatherCond = "weather conditions";
 	model.humidity = "humidity";
 	model.windSpeed = "wind speed";
+	model.stateP = $stateParams;
 	var allData;
 	var tempArr = [];
 	var timeArr = [];
-	
-	var promise = serverSrvc.getData($stateParams.lat, $stateParams.lon, $stateParams.cityId);
-	promise.then(function(data){
+	var promise;
+	model.stateP.lat;
+	model.stateP.lon;
+
+	var geoLocation = {
+		getLocation : function(){
+			var defer = $q.defer();
+			navigator.geolocation.getCurrentPosition(function(position) {
+		  	defer.resolve({'lat': position.coords.latitude,'lon':position.coords.longitude});
+			});
+			return defer.promise;
+		}
+	};
+
+	if(!model.stateP.lon && !model.stateP.cityId){
+		geoLocation.getLocation().then(function(geoPosition){
+			model.stateP.lat = geoPosition.lat;
+			model.stateP.lon = geoPosition.lon;
+		// var promise = serverSrvc.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId);
+		promise = serverSrvc.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId).then(function(data){parseData(data)});;
+		});
+		
+	}
+	// if we have cityId
+	else {
+		promise = serverSrvc.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId).then(function(data){parseData(data)});
+	}
+
+	parseData = function(data){
 	$scope.respData = data;
 	model.respData = data;
   model.cityName =  $scope.respData.city.name;
@@ -57,14 +83,14 @@ function requestToApi($scope, serverSrvc, $stateParams){
 	    }
 	  }
 	});
-	angular.copy(this.cityName,model.cityName);
-	});
+	// angular.copy(this.cityName,model.cityName);
+	};
 };
 var module = angular.module("weatherLib");
 module.component("additionalData",{
 	templateUrl:"additional-data/additional-data.html",
 	controllerAs: "model",
-	controller: ["$scope","serverSrvc","$stateParams",requestToApi]
+	controller: ["$scope","serverSrvc","$stateParams","$q",requestToApi]
 
 }).component("diagram",{
 	controller: function() {

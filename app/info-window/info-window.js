@@ -4,7 +4,6 @@ controller = function($scope, $stateParams,functionsSrvc){
 	var model = this;
 
 	 setData = function(data){
-	 	console.log(data);
 		var arr4Temp = [];
 		for(var i=0;i<10;i++){
 			arr4Temp.push(Math.round(functionsSrvc.kelvinToCelsius(data.list[i].main.temp)));
@@ -27,7 +26,6 @@ controller = function($scope, $stateParams,functionsSrvc){
 		model.myData = changesObj.respdata.currentValue;
 		if(model.myData != undefined){
 			setData(model.myData);
-			console.log("setData is set "+model.myData);
 		}
 	};
 };
@@ -36,8 +34,7 @@ infoModule.component("infoWindow",{
 	templateUrl:"info-window/info-window.html",
 	controllerAs: "model",
 	bindings: {
-		respdata : "<",
-		herohero : "<"
+		respdata : "<"
 	},
 	controller: ["$scope", "$stateParams", "functionsSrvc",controller]
 });
