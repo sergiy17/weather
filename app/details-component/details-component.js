@@ -1,9 +1,9 @@
-function requestToApi($scope, serverSrvc,functionsSrvc, $stateParams,$q){
+function requestToApi($scope, serverSrvc,functionsSrvc){
 	var model = this;
 	model.weatherCond = "weather conditions";
 	model.humidity = "humidity";
 	model.windSpeed = "wind speed";
-	model.stateP = $stateParams;
+	model.stateP = functionsSrvc.getStateP();
 	var allData;
 	var tempArr = [];
 	var timeArr = [];
@@ -12,18 +12,8 @@ function requestToApi($scope, serverSrvc,functionsSrvc, $stateParams,$q){
 	model.stateP.lon;
 	model.currentLang = functionsSrvc.windowLang();
 
-	var geoLocation = {
-		getLocation : function(){
-			var defer = $q.defer();
-			navigator.geolocation.getCurrentPosition(function(position) {
-		  	defer.resolve({'lat': position.coords.latitude,'lon':position.coords.longitude});
-			});
-			return defer.promise;
-		}
-	};
-	// if we don't have gps cords & cityId
 	if(!model.stateP.lon && !model.stateP.cityId){
-		geoLocation.getLocation().then(function(geoPosition){
+		functionsSrvc.getLocation().then(function(geoPosition){
 			model.stateP.lat = geoPosition.lat;
 			model.stateP.lon = geoPosition.lon;
 			promise = serverSrvc.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId, model.currentLang).then(function(data){parseData(data)});;
@@ -91,7 +81,7 @@ var module = angular.module("weatherLib");
 module.component("detailsComponent",{
 	templateUrl:"details-component/details-component.html",
 	controllerAs: "model",
-	controller: ["$scope","serverSrvc","functionsSrvc","$stateParams","$q",requestToApi]
+	controller: ["$scope","serverSrvc","functionsSrvc",requestToApi]
 
 }).component("diagram",{
 	controller: function() {

@@ -1,6 +1,6 @@
 var module = angular.module("weatherLib");
 
-module.service("functionsSrvc",function(){
+module.service("functionsSrvc",function($q,$stateParams){
 	return { 
 		getMaxOfArray: function (Arr) {
 		  return Math.max.apply(null, Arr);
@@ -10,6 +10,16 @@ module.service("functionsSrvc",function(){
 		},
 		windowLang: function(){
 			return window.navigator.language;
-		} 
+		},
+		getLocation : function(){
+			var defer = $q.defer();
+			navigator.geolocation.getCurrentPosition(function(position) {
+		  	defer.resolve({'lat': position.coords.latitude,'lon':position.coords.longitude});
+			});
+			return defer.promise;
+		},
+		getStateP : function(){
+			return $stateParams;
+		}
 	}
 });
