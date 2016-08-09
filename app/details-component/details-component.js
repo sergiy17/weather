@@ -20,13 +20,12 @@ function requestToApi($scope, serverSrvc, $stateParams,$q){
 			return defer.promise;
 		}
 	};
-
+	// if we dont have gps cords & cityId
 	if(!model.stateP.lon && !model.stateP.cityId){
 		geoLocation.getLocation().then(function(geoPosition){
 			model.stateP.lat = geoPosition.lat;
 			model.stateP.lon = geoPosition.lon;
-		// var promise = serverSrvc.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId);
-		promise = serverSrvc.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId).then(function(data){parseData(data)});;
+			promise = serverSrvc.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId).then(function(data){parseData(data)});;
 		});
 	}
 	// if we have cityId
@@ -54,7 +53,7 @@ function requestToApi($scope, serverSrvc, $stateParams,$q){
 
 	for(var i=0;i<10;i++){
 		var arr4temp = [];
-		arr4temp = Math.round(allData[i].main.temp-273);
+		arr4temp = Math.round(allData[i].main.temp);
 		tempArr.push(arr4temp);
 	}
 

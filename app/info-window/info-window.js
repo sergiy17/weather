@@ -6,7 +6,7 @@ controller = function($scope, $stateParams,functionsSrvc){
 	 setData = function(data){
 		var arr4Temp = [];
 		for(var i=0;i<10;i++){
-			arr4Temp.push(Math.round(functionsSrvc.kelvinToCelsius(data.list[i].main.temp)));
+			arr4Temp.push(Math.round(data.list[i].main.temp));
 		}
 		var timeArr = [];
 		for(var i=0;i<10;i++){
@@ -17,7 +17,7 @@ controller = function($scope, $stateParams,functionsSrvc){
 		model.timeArr = timeArr;
 		model.cityName = data.city.name;
 		model.windSpeedNow = data.list[0].wind.speed;
-		model.tempNow = Math.round(functionsSrvc.kelvinToCelsius(data.list[0].main.temp));
+		model.tempNow = data.list[0].main.temp;
 		model.arr4Temp = arr4Temp;
 		model.maxTmp = functionsSrvc.getMaxOfArray(arr4Temp); //max temperature
 		model.minTmp = functionsSrvc.getMinOfArray(arr4Temp); //minimal temperature
