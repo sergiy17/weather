@@ -7,6 +7,9 @@ module.service("functionsSrvc",function(){
 		},
 		getMinOfArray: function (Arr) {
 		  return Math.min.apply(null, Arr);
-		}
+		},
+		windowLang: function(){
+			return window.navigator.language;
+		} 
 	}
 });

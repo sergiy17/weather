@@ -10,7 +10,7 @@
 	    <li class="list-group-item nopadding" ng-repeat="datum in model.Data">
 	      <div class="row weatherList">
 	        <div class="col-xs-7"><h4>{{ datum.dt * 1000 | date: 'MMM d,  HH:mm' }}</h4></div>
-	      <div class="col-xs-5"><h4>{{ datum.weather[0].main }}</h4></div>
+	      <div class="col-xs-5"><h4>{{ datum.weather[0].description }}</h4></div>
 	      </div>
 	    </li>
 	  </ul>
