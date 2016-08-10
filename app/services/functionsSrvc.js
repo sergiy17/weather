@@ -9,7 +9,7 @@ module.service("functionsSrvc",function($q,$stateParams){
 		  return Math.min.apply(null, Arr);
 		},
 		windowLang: function(){
-			return window.navigator.language;
+			return window.navigator.languages[0];
 		},
 		getLocation : function(){
 			var defer = $q.defer();
