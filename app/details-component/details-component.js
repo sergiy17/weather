@@ -76,6 +76,24 @@ function requestToApi($scope, serverSrvc,functionsSrvc){
 	};
 };
 var module = angular.module("weatherLib");
+module.run(function($rootScope){
+
+  $rootScope
+    .$on('$stateChangeStart', 
+      function(event, toState, toParams, fromState, fromParams){ 
+        $("#ui-view").html("");
+        $(".page-loading").removeClass("hidden");
+    });
+
+  $rootScope
+    .$on('$stateChangeSuccess',
+      function(event, toState, toParams, fromState, fromParams){ 
+        $(".page-loading").addClass("hidden");
+    });
+
+});
+
+
 module.component("detailsComponent",{
 	templateUrl:"details-component/details-component.html",
 	controllerAs: "model",

@@ -13,3 +13,15 @@ body {
   padding: 10px;
   width: 50%;
 }
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+  
+}
+
+.page-loading{
+	margin: auto;
+	width: 200px;
+	height:200px;
+	background-image: url("/spinner2.gif");
+}
