@@ -13,7 +13,7 @@ routerApp.
       url: '/cities-list/',
       template: '<cities-list></cities-list>'
     })
-    // for GPS
+    // for GPS start
     .state('details',{
       url: '/details?lat&lon',
       template: '<details-component></details-component>'
@@ -46,8 +46,8 @@ routerApp.
       url:"/overnight",
       templateUrl:"partials/partial-overnight.html"
     })
-    // for GPS
-    // for cityId
+    // for GPS finish
+    // for cityId start
     .state('/details/:cityId', {
       url: '/details/:cityId',
       template: '<details-component></details-component>'
@@ -79,8 +79,67 @@ routerApp.
     .state("/details/:cityId.overnight",{
       url:"/overnight",
       templateUrl:"partials/partial-overnight.html"
-    });// for cityId
-
+    })// for cityId finish
+    // for '/' start
+    .state("/.now",{
+      url: "now",
+      templateUrl: "partials/partial-now.html"
+    })
+    .state('/.daily', {
+      url: 'daily',
+      templateUrl: 'partials/partial-daily.html'
+    })
+    .state("/.hourly",{
+      url: "hourly",
+      templateUrl: "partials/partial-hourly.html"
+    })
+    .state("/.morning",{
+      url:"morning",
+      templateUrl:"partials/partial-morning.html"
+    })
+    .state("/.afternoon",{
+      url:"afternoon",
+      templateUrl:"partials/partial-afternoon.html"
+    })
+    .state("/.evening",{
+      url:"evening",
+      templateUrl:"partials/partial-evening.html"
+    })  
+    .state("/.overnight",{
+      url:"overnight",
+      templateUrl:"partials/partial-overnight.html"
+    })
+    // for '/' finish
+    // for '/cities-list' start
+    .state("/cities-list.now",{
+      url: "now",
+      templateUrl: "partials/partial-now.html"
+    })
+    .state('/cities-list.daily', {
+      url: 'daily',
+      templateUrl: 'partials/partial-daily.html'
+    })
+    .state("/cities-list.hourly",{
+      url: "hourly",
+      templateUrl: "partials/partial-hourly.html"
+    })
+    .state("/cities-list.morning",{
+      url:"morning",
+      templateUrl:"partials/partial-morning.html"
+    })
+    .state("/cities-list.afternoon",{
+      url:"afternoon",
+      templateUrl:"partials/partial-afternoon.html"
+    })
+    .state("/cities-list.evening",{
+      url:"evening",
+      templateUrl:"partials/partial-evening.html"
+    })  
+    .state("/cities-list.overnight",{
+      url:"overnight",
+      templateUrl:"partials/partial-overnight.html"
+    });
+    // for '/cities-list' finish
   $provide.decorator('$uiViewScroll', function ($delegate) {
     return function (uiViewElement) {
       var top = uiViewElement.getBoundingClientRect().top;

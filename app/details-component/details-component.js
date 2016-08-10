@@ -24,8 +24,6 @@ function requestToApi($scope, serverSrvc,functionsSrvc){
 		promise = serverSrvc.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId, model.currentLang).then(function(data){parseData(data)});
 	}
 
-
-
 	parseData = function(data){
 	$scope.respData = data;
 	model.respData = data;
