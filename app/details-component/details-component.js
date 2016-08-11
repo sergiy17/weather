@@ -1,4 +1,5 @@
-function requestToApi($scope, serverSrvc,functionsSrvc){
+var module = angular.module("weatherLib");
+function requestToApi($scope, functionsSrvc,serverSrvc){
 	var model = this;
 	model.weatherCond = "weather conditions";
 	model.humidity = "humidity";
@@ -10,25 +11,23 @@ function requestToApi($scope, serverSrvc,functionsSrvc){
 	var promise;
 	model.stateP.lat;
 	model.stateP.lon;
-	model.currentLang = functionsSrvc.windowLang();
 
 	if(!model.stateP.lon && !model.stateP.cityId){
 		functionsSrvc.getLocation().then(function(geoPosition){
 			model.stateP.lat = geoPosition.lat;
 			model.stateP.lon = geoPosition.lon;
-			promise = serverSrvc.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId, model.currentLang).then(function(data){parseData(data)});;
+			promise = serverSrvc.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId).then(function(data){parseData(data)});;
 		});
 	}
 	// if we have cityId
 	else {
-		promise = serverSrvc.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId, model.currentLang).then(function(data){parseData(data)});
+		promise = serverSrvc.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId).then(function(data){parseData(data)});
 	}
 
 	parseData = function(data){
 	$scope.respData = data;
 	model.respData = data;
   model.cityName =  $scope.respData.city.name;
-  model.cityname =  $scope.respData.city.name;
   allData = $scope.respData.list.map(function(i){
     return i;
   });
@@ -75,29 +74,29 @@ function requestToApi($scope, serverSrvc,functionsSrvc){
 	// angular.copy(this.cityName,model.cityName);
 	};
 };
-var module = angular.module("weatherLib");
-module.run(function($rootScope){
 
+module.config(function(serverSrvcProvider){
+	serverSrvcProvider.setLanguage(window.navigator.languages[0]);
+});
+
+module.run(function($rootScope){
   $rootScope
     .$on('$stateChangeStart', 
       function(event, toState, toParams, fromState, fromParams){ 
         $("#ui-view").html("");
         $(".page-loading").removeClass("hidden");
     });
-
   $rootScope
     .$on('$stateChangeSuccess',
       function(event, toState, toParams, fromState, fromParams){ 
         $(".page-loading").addClass("hidden");
     });
-
 });
-
 
 module.component("detailsComponent",{
 	templateUrl:"details-component/details-component.html",
 	controllerAs: "model",
-	controller: ["$scope","serverSrvc","functionsSrvc",requestToApi]
+	controller: ["$scope","functionsSrvc","serverSrvc",requestToApi]
 
 }).component("diagram",{
 	controller: function() {
