@@ -5,7 +5,8 @@ function fetchCities($http){
 		return response.data;
 	});
 }
-function controller($http, $scope, $state, $timeout){
+function controller($http, $scope, $state, $timeout, $log){
+	$log.debug("weatherCity.cities-list.controller");
 	var model = this;
 	$scope.currentCity;
 	$scope.dirty = {};
@@ -64,5 +65,5 @@ function controller($http, $scope, $state, $timeout){
 module.component("citiesList",{
 	templateUrl:"cities-list/cities-list.html",
 	controllerAs: "model",
-	controller: ["$http","$scope","$state","$timeout", controller]
+	controller: ["$http","$scope","$state","$timeout","$log", controller]
 });

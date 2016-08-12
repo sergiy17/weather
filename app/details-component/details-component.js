@@ -1,5 +1,11 @@
 var module = angular.module("weatherLib");
-function requestToApi($scope, functionsSrvc,serverSrvc){
+
+module.config(function(serverSrvcProvider, $logProvider){
+	serverSrvcProvider.setLanguage(window.navigator.languages[0]);
+	$logProvider.debugEnabled(true);
+});
+
+function requestToApi($scope, functionsSrvc,serverSrvc, $log){
 	var model = this;
 	model.weatherCond = "weather conditions";
 	model.humidity = "humidity";
@@ -11,6 +17,8 @@ function requestToApi($scope, functionsSrvc,serverSrvc){
 	var promise;
 	model.stateP.lat;
 	model.stateP.lon;
+	$log.debug("weatherLib.requestToApi");
+
 
 	if(!model.stateP.lon && !model.stateP.cityId){
 		functionsSrvc.getLocation().then(function(geoPosition){
@@ -75,9 +83,7 @@ function requestToApi($scope, functionsSrvc,serverSrvc){
 	};
 };
 
-module.config(function(serverSrvcProvider){
-	serverSrvcProvider.setLanguage(window.navigator.languages[0]);
-});
+
 
 module.run(function($rootScope){
   $rootScope
@@ -96,7 +102,7 @@ module.run(function($rootScope){
 module.component("detailsComponent",{
 	templateUrl:"details-component/details-component.html",
 	controllerAs: "model",
-	controller: ["$scope","functionsSrvc","serverSrvc",requestToApi]
+	controller: ["$scope","functionsSrvc","serverSrvc", "$log",requestToApi]
 
 }).component("diagram",{
 	controller: function() {

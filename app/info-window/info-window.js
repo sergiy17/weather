@@ -1,9 +1,10 @@
 var infoModule = angular.module('weatherLib');
 
-controller = function($scope, $stateParams,functionsSrvc){
+controller = function($scope, $stateParams,functionsSrvc, $log){
 	var model = this;
 
 	 setData = function(data){
+	 	$log.debug("weatherLib.info-window.setData");
 		var arr4Temp = [];
 		for(var i=0;i<10;i++){
 			arr4Temp.push(Math.round(data.list[i].main.temp));
@@ -36,5 +37,5 @@ infoModule.component("infoWindow",{
 	bindings: {
 		respdata : "<"
 	},
-	controller: ["$scope", "$stateParams", "functionsSrvc",controller]
+	controller: ["$scope", "$stateParams", "functionsSrvc","$log",controller]
 });
