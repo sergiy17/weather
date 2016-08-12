@@ -41,6 +41,11 @@ function requestToApi($scope, functionsSrvc,serverSrvc, $log){
   });
   allData = allData.slice(0,10);
   model.Data = allData;
+
+  for(var i=0;i<10;i++){
+  	model.Data[i].dt = model.Data[i].dt * 1000;
+  }
+  
 	for(var i=0;i<10;i++){
 		var a = data.list[i].dt_txt;
 		a = a.slice(11,16);

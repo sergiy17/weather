@@ -15,12 +15,12 @@ module.provider("serverSrvc",function(){
 				}
 				$log.debug("weatherLib.serverSrvc.$get");
 				if(cityId){
-					xhttp.open("GET", "http://api.openweathermap.org/data/2.5/forecast?id=" + cityId + "&mode=json&units=metric&lang="+lang+"&appid=0c853911efc43a5ce9db3e839f13abc9", true);
+					xhttp.open("GET", "http://api.openweathermap.org/data/2.5/forecast?id=" + cityId + "&mode=json&units=metric&lang="+lang+"&cnt=10&appid=0c853911efc43a5ce9db3e839f13abc9", true);
 					xhttp.send();
 					return promise.promise;
 				}
 				else{
-					xhttp.open("GET", "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&mode=json&units=metric&lang="+lang+"&appid=0c853911efc43a5ce9db3e839f13abc9", true);
+					xhttp.open("GET", "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&mode=json&units=metric&lang="+lang+"&cnt=10&appid=0c853911efc43a5ce9db3e839f13abc9", true);
 					xhttp.send();
 				return promise.promise;
 				}
