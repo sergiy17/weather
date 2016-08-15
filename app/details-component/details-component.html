@@ -9,8 +9,8 @@
 	  <h4 class="list-heading text-uppercase">{{ model.weatherCond }}</h4>
 	    <li class="list-group-item nopadding" ng-repeat="datum in model.Data">
 	      <div class="row weatherList">
-	        <div class="col-xs-7"><h4>{{ datum.dt | date: 'MMM d,  HH:mm' }}</h4></div>
-	      <div class="col-xs-5"><h4>{{ datum.weather[0].description }}</h4></div>
+	        <div class="col-xs-6"><h4>{{ datum.dt | date: 'MMM d,  HH:mm' }}</h4></div>
+	      <div class="col-xs-6"><h4>{{ datum.weather[0].description }}</h4></div>
 	      </div>
 	    </li>
 	  </ul>

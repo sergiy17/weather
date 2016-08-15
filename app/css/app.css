@@ -18,10 +18,20 @@ body {
   visibility: hidden !important;
   
 }
-
 .page-loading{
 	margin: auto;
 	width: 200px;
 	height:200px;
 	background-image: url("/spinner2.gif");
+}
+li {
+  opacity: 1;
+}
+li.ng-enter {
+  -webkit-transition: 3s;
+  transition: 3s;
+  opacity: 0;
+}
+li.ng-enter-active {
+  opacity: 1;	
 }
