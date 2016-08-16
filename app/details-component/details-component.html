@@ -2,37 +2,37 @@
 <info-window respdata="model.respData"></info-window>
 <div class="row">
   <div class="col-md-12">
-    <h3>Additional Data for {{ model.cityName }} </h3>
+    <h3>Additional Data for {{::model.cityName }} </h3>
   </div>
   <div class="col-md-4">
     <ul class="list-group orange">
-	  <h4 class="list-heading text-uppercase">{{ model.weatherCond }}</h4>
-	    <li class="list-group-item nopadding" ng-repeat="datum in model.Data">
-	      <div class="row weatherList">
-	        <div class="col-xs-6"><h4>{{::datum.dt | date: 'MMM d,  HH:mm' }}</h4></div>
-	      <div class="col-xs-6"><h4>{{::datum.weather[0].description }}</h4></div>
-	      </div>
-	    </li>
-	  </ul>
-	</div>
-  <div class="col-md-4">
-    <ul class="list-group green">
-    <h4 class="list-heading text-uppercase">{{::model.humidity }}</h4>
+    <h4 class="list-heading text-uppercase" data-ng-bind="model.weatherCond"></h4>
       <li class="list-group-item nopadding" ng-repeat="datum in model.Data">
         <div class="row weatherList">
-          <div class="col-xs-7"><h4>{{::datum.dt | date: 'MMM d,  HH:mm' }}</h4></div>
-          <div class="col-xs-5"><h4>{{::datum.main.humidity }}%</h4></div>
+          <div class="col-xs-6"><h4 data-ng-bind="datum.dt | date: 'MMM d,  HH:mm'"></h4></div>
+        <div class="col-xs-6"><h4 data-ng-bind="datum.weather[0].description"></h4></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-4">
+    <ul class="list-group green">
+    <h4 class="list-heading text-uppercase" data-ng-bind="model.humidity"></h4>
+      <li class="list-group-item nopadding" ng-repeat="datum in model.Data">
+        <div class="row weatherList">
+          <div class="col-xs-7"><h4 data-ng-bind="datum.dt | date: 'MMM d,  HH:mm'"></h4></div>
+          <div class="col-xs-5"><h4 class="col-xs-5" data-ng-bind="datum.main.humidity"><h4>%</h4></h4></div>
         </div>
       </li>
     </ul>
   </div>
   <div class="col-md-4">
     <ul class="list-group violet">
-      <h4 class="list-heading text-uppercase">{{::model.windSpeed }}</h4>
+      <h4 class="list-heading text-uppercase" data-ng-bind="model.windSpeed"></h4>
       <li class="list-group-item nopadding" ng-repeat="datum in model.Data" >
         <div class="row weatherList">
-          <div class="col-xs-7"><h4>{{::datum.dt | date: 'MMM d,  HH:mm'}}</h4></div>
-          <div class="col-xs-5"><h4>{{::datum.wind.speed }} m/s</h4></div>
+          <div class="col-xs-7"><h4 data-ng-bind="datum.dt | date: 'MMM d,  HH:mm'"></h4></div>
+          <div class="col-xs-5"><h4 data-ng-bind="(datum.wind.speed+' m/s')"></h4></div>
         </div>
       </li>
     </ul>
