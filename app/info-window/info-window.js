@@ -1,6 +1,6 @@
 var infoModule = angular.module('weatherLib');
 
-controller = function($scope, $stateParams,functionsSrvc, $log){
+controller = function($scope, $stateParams,functionsService, $log){
 	var model = this;
 
 	 setData = function(data){
@@ -20,8 +20,8 @@ controller = function($scope, $stateParams,functionsSrvc, $log){
 		model.windSpeedNow = data.list[0].wind.speed;
 		model.tempNow = data.list[0].main.temp;
 		model.arr4Temp = arr4Temp;
-		model.maxTmp = functionsSrvc.getMaxOfArray(arr4Temp); //max temperature
-		model.minTmp = functionsSrvc.getMinOfArray(arr4Temp); //minimal temperature
+		model.maxTmp = functionsService.getMaxOfArray(arr4Temp); //max temperature
+		model.minTmp = functionsService.getMinOfArray(arr4Temp); //minimal temperature
 	};
 	this.$onChanges = function(changesObj){
 		model.myData = changesObj.respdata.currentValue;
@@ -37,5 +37,5 @@ infoModule.component("infoWindow",{
 	bindings: {
 		respdata : "<"
 	},
-	controller: ["$scope", "$stateParams", "functionsSrvc","$log",controller]
+	controller: ["$scope", "$stateParams", "functionsService","$log",controller]
 });

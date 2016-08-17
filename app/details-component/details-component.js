@@ -1,40 +1,40 @@
 var module = angular.module("weatherLib");
 
-module.config(function(serverSrvcProvider, $logProvider){
-	serverSrvcProvider.setLanguage(window.navigator.languages[0]);
+module.config(function(serverServiceProvider, $logProvider){
+	serverServiceProvider.setLanguage(window.navigator.languages[0]);
 	$logProvider.debugEnabled(true);
 });
 
-function requestToApi($scope, functionsSrvc,serverSrvc, $log, $timeout){
+function requestToApi($scope, functionsService,serverService, $log, $timeout){
 	var model = this;
 	$scope.respData = {};
 		model.weatherCond = "weather conditions";
 		model.humidity = "humidity";
 		model.windSpeed = "wind speed";
-		model.stateP = functionsSrvc.getStateP();
+		model.stateP = functionsService.getStateP();
 		var tempArr = [];
 		var timeArr = [];
 		var promise;
 		model.stateP.lat;
 		model.stateP.lon;
 		$log.debug("weatherLib.requestToApi");
-		// console.group(model.stateP.cityId);
-
-		if(!model.stateP.lon && !model.stateP.cityId){
-			functionsSrvc.getLocation().then(function(geoPosition){
-				model.stateP.lat = geoPosition.lat;
-				model.stateP.lon = geoPosition.lon;
-				serverSrvc.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId).then(function(weatherData){
+		$timeout(function(){
+			if(!model.stateP.lon && !model.stateP.cityId){
+				functionsService.getLocation().then(function(geoPosition){
+					model.stateP.lat = geoPosition.lat;
+					model.stateP.lon = geoPosition.lon;
+					serverService.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId).then(function(weatherData){
+						parseData(weatherData);
+					});
+				});
+			}
+			else {
+				console.log("with cityId");
+				serverService.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId).then(function(weatherData){
 					parseData(weatherData);
 				});
-			});
-		}
-		else {
-			console.log("with cityId");
-			serverSrvc.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId).then(function(weatherData){
-				parseData(weatherData);
-			});
-		}
+			}
+		});
 
 	parseData = function(data){
 		model.respData = data;
@@ -106,7 +106,7 @@ module.run(function($rootScope){
 module.component("detailsComponent",{
 	templateUrl:"details-component/details-component.html",
 	controllerAs: "model",
-	controller: ["$scope","functionsSrvc","serverSrvc", "$log","$timeout",requestToApi]
+	controller: ["$scope","functionsService","serverService", "$log","$timeout",requestToApi]
 
 }).component("diagram",{
 	controller: function() {
