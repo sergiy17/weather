@@ -5,70 +5,63 @@ module.config(function(serverServiceProvider, $logProvider){
 	$logProvider.debugEnabled(true);
 });
 
-function requestToApi($scope, functionsService,serverService, $log, $timeout){
-	var model = this;
+function requestToApi($scope, functionsService, serverService, $log, $timeout){
+	var vm = this;
 	$scope.respData = {};
-		model.weatherCond = "weather conditions";
-		model.humidity = "humidity";
-		model.windSpeed = "wind speed";
-		model.stateP = functionsService.getStateP();
+		vm.weatherCond = "weather conditions";
+		vm.humidity = "humidity";
+		vm.windSpeed = "wind speed";
+		vm.stateP = functionsService.getStateP();
 		var tempArr = [];
 		var timeArr = [];
-		var promise;
-		model.stateP.lat;
-		model.stateP.lon;
+		// var promise;
 		$log.debug("weatherLib.requestToApi");
 		$timeout(function(){
-			if(!model.stateP.lon && !model.stateP.cityId){
+			if(!vm.stateP.lon && !vm.stateP.cityId){
 				functionsService.getLocation().then(function(geoPosition){
-					model.stateP.lat = geoPosition.lat;
-					model.stateP.lon = geoPosition.lon;
-					serverService.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId).then(function(weatherData){
+					vm.stateP.lat = geoPosition.lat;
+					vm.stateP.lon = geoPosition.lon;
+					serverService.getData(vm.stateP.lat, vm.stateP.lon, vm.stateP.cityId).then(function(weatherData){
 						parseData(weatherData);
 					});
 				});
 			}
 			else {
 				console.log("with cityId");
-				serverService.getData(model.stateP.lat, model.stateP.lon, model.stateP.cityId).then(function(weatherData){
+				serverService.getData(vm.stateP.lat, vm.stateP.lon, vm.stateP.cityId).then(function(weatherData){
 					parseData(weatherData);
 				});
 			}
 		});
 
 	parseData = function(data){
-		model.respData = data;
-	  model.cityName =  model.respData.city.name;
-	  model.Data = model.respData.list.map(function(i){
+		vm.respData = data;
+	  vm.cityName =  vm.respData.city.name;
+
+	  vm.arrOfObj = vm.respData.list.map(function(i){
 	    return i;
 	  });
-
 	  for(var i=0;i<10;i++){
-	  	model.Data[i].dt = model.Data[i].dt * 1000;
+	  	vm.arrOfObj[i].dt = vm.arrOfObj[i].dt * 1000;
 	  }
 	  
 		for(var i=0;i<10;i++){
-			var a = model.respData.list[i].dt_txt;
+			var a = vm.respData.list[i].dt_txt;
 			a = a.slice(11,16);
 			timeArr.push(a);
 		}
 		
-		timeArr.slice(0,10);
-
 		for(var i=0;i<10;i++){
-			var arr4temp = [];
-			arr4temp = Math.round(model.Data[i].main.temp);
-			tempArr.push(arr4temp);
+			tempArr.push(Math.round(vm.arrOfObj[i].main.temp));
 		}
 
 		var ctx = document.getElementById("myChart");
-		var timeD = timeArr;
 		var myChart = new Chart(ctx, {
-		  type: 'bar',
+		  type: "bar",
 		  data: {
-		    labels: timeD,
+		    labels: timeArr,
 		    datasets: [{
-		      label: 'Temperature for '+model.cityName,
+		      label: 'Temperature for '+vm.cityName,
 		      data: tempArr,
 		      backgroundColor: 'rgba(54, 162, 235, 1)',
 		      borderColor: 'rgba(54, 162, 235, 1)',

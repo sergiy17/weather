@@ -5,9 +5,9 @@ function fetchCities($http){
 		return response.data;
 	});
 }
-function controller($http, $scope, $state, $timeout, $log){
-	$log.debug("weatherCity.cities-list.controller");
-	var model = this;
+function citiesListController($http, $scope, $state, $log){
+	$log.debug("weatherCity.citiesListController");
+	var vm = this;
 	$scope.currentCity;
 	$scope.dirty = {};
 	// Redirects to details & city which was selected
@@ -17,7 +17,7 @@ function controller($http, $scope, $state, $timeout, $log){
 	var lat = 0;
 	var lon = 0;
 	// 'gpsCity' <= takes our cordinates
-	model.gpsCity = function(){
+	vm.gpsCity = function(){
 		navigator.geolocation.getCurrentPosition(function(position) {
 	  	lat = position.coords.latitude;
 	  	lon = position.coords.longitude;
@@ -25,11 +25,11 @@ function controller($http, $scope, $state, $timeout, $log){
 		});
 	};
 
-	model.arrOfObj = [];
-	model.currentCountry = 'UA';
-	model.$onInit = function(){
+	vm.arrOfObj = [];
+	vm.currentCountry = 'UA';
+	vm.$onInit = function(){
 		fetchCities($http).then(function(cities){
-			model.arrOfObj = cities;
+			vm.arrOfObj = cities;
 		});
 	};
 	function redirect(selected_item){
@@ -46,7 +46,7 @@ function controller($http, $scope, $state, $timeout, $log){
 		  threshold: 0.1
 		}
 	// Find first 10 cities that start with `term`.
-		var f = new Fuse(model.arrOfObj, options);
+		var f = new Fuse(vm.arrOfObj, options);
 		var resCities = [];
 		var results = f.search(q);
 		for(var ii=0;ii<results.length && resCities.length < 10;ii++){
@@ -65,5 +65,5 @@ function controller($http, $scope, $state, $timeout, $log){
 module.component("citiesList",{
 	templateUrl:"cities-list/cities-list.html",
 	controllerAs: "model",
-	controller: ["$http","$scope","$state","$timeout","$log", controller]
+	controller: ["$http","$scope","$state","$log", citiesListController]
 });

@@ -1,32 +1,30 @@
 var infoModule = angular.module('weatherLib');
 
-controller = function($scope, $stateParams,functionsService, $log){
-	var model = this;
+infoWindowСontroller = function($scope, $stateParams,functionsService, $log){
+	var vm = this;
 
 	 setData = function(data){
 	 	$log.debug("weatherLib.info-window.setData");
-		var arr4Temp = [];
+		vm.arr4Temp = [];
+		vm.timeArr = [];
 		for(var i=0;i<10;i++){
-			arr4Temp.push(Math.round(data.list[i].main.temp));
+			vm.arr4Temp.push(Math.round(data.list[i].main.temp));
 		}
-		var timeArr = [];
 		for(var i=0;i<10;i++){
 			var a = data.list[i].dt_txt;
 			a = a.slice(11,16);
-			timeArr.push(a);
+			vm.timeArr.push(a);
 		}
-		model.timeArr = timeArr;
-		model.cityName = data.city.name;
-		model.windSpeedNow = data.list[0].wind.speed;
-		model.tempNow = data.list[0].main.temp;
-		model.arr4Temp = arr4Temp;
-		model.maxTmp = functionsService.getMaxOfArray(arr4Temp); //max temperature
-		model.minTmp = functionsService.getMinOfArray(arr4Temp); //minimal temperature
+		vm.cityName = data.city.name;
+		vm.windSpeedNow = data.list[0].wind.speed;
+		vm.tempNow = data.list[0].main.temp;
+		vm.maxTmp = functionsService.getMaxOfArray(vm.arr4Temp); //max temperature
+		vm.minTmp = functionsService.getMinOfArray(vm.arr4Temp); //minimal temperature
 	};
 	this.$onChanges = function(changesObj){
-		model.myData = changesObj.respdata.currentValue;
-		if(model.myData != undefined){
-			setData(model.myData);
+		vm.myData = changesObj.respdata.currentValue;
+		if(vm.myData != undefined){
+			setData(vm.myData);
 		}
 	};
 };
@@ -37,5 +35,5 @@ infoModule.component("infoWindow",{
 	bindings: {
 		respdata : "<"
 	},
-	controller: ["$scope", "$stateParams", "functionsService","$log",controller]
+	controller: ["$scope", "$stateParams", "functionsService","$log",infoWindowСontroller]
 });
