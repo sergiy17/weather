@@ -12,9 +12,10 @@ function requestToApi($scope, functionsService, serverService, $log, $timeout){
 		vm.humidity = "humidity";
 		vm.windSpeed = "wind speed";
 		vm.stateP = functionsService.getStateP();
+		$scope.radio = "bar";
 		var tempArr = [];
 		var timeArr = [];
-		// var promise;
+
 		$log.debug("weatherLib.requestToApi");
 		$timeout(function(){
 			if(!vm.stateP.lon && !vm.stateP.cityId){
@@ -55,28 +56,40 @@ function requestToApi($scope, functionsService, serverService, $log, $timeout){
 			tempArr.push(Math.round(vm.arrOfObj[i].main.temp));
 		}
 
-		var ctx = document.getElementById("myChart");
-		var myChart = new Chart(ctx, {
-		  type: "bar",
-		  data: {
-		    labels: timeArr,
-		    datasets: [{
-		      label: 'Temperature for '+vm.cityName,
-		      data: tempArr,
-		      backgroundColor: 'rgba(54, 162, 235, 1)',
-		      borderColor: 'rgba(54, 162, 235, 1)',
-		      borderWidth: 1
-		    }]
-		  },
-		  options: {
-		    scales: {
-		      yAxes: [{
-		        ticks: {
-		          beginAtZero:true
-		        }
-		      }]
-		    }
-		  }
+		$scope.$watch('radio', function() {
+			var ctx = document.getElementById("myChart").getContext("2d");
+			destroy()
+			if(myChart){
+	      myChart.destroy();
+	    }
+			var myChart = new Chart(ctx, {
+			  type: $scope.radio,
+			  data: {
+			    labels: timeArr,
+			    datasets: [{
+			      data: tempArr,
+			       backgroundColor: 'rgba(54, 162, 235, 0.7)',
+			      borderColor: 'rgba(54, 162, 235, 1)',
+			      borderWidth: 1
+			    }]
+			  },
+			  options: {
+			  	title: {
+            display: true,
+            text: 'Temperature for '+vm.cityName
+        	},
+			  	legend: {
+            display: false
+        	},
+			    scales: {
+			      yAxes: [{
+			        ticks: {
+			          beginAtZero:true
+			        }
+			      }]
+			    }
+			  }
+			});
 		});
 	// angular.copy(this.cityName,model.cityName);
 	};
