@@ -13,6 +13,7 @@ function requestToApi($scope, functionsService, serverService, $log, $timeout){
 		vm.windSpeed = "wind speed";
 		vm.stateP = functionsService.getStateP();
 		$scope.radio = "bar";
+		$scope.myChart = undefined;
 		var tempArr = [];
 		var timeArr = [];
 
@@ -34,7 +35,6 @@ function requestToApi($scope, functionsService, serverService, $log, $timeout){
 				});
 			}
 		});
-
 	parseData = function(data){
 		vm.respData = data;
 	  vm.cityName =  vm.respData.city.name;
@@ -51,35 +51,42 @@ function requestToApi($scope, functionsService, serverService, $log, $timeout){
 			a = a.slice(11,16);
 			timeArr.push(a);
 		}
-		
+		timeArr.slice(0,10);
 		for(var i=0;i<10;i++){
 			tempArr.push(Math.round(vm.arrOfObj[i].main.temp));
 		}
 
+		var ctx = document.getElementById("myChart");
 		$scope.$watch('radio', function() {
-			var ctx = document.getElementById("myChart").getContext("2d");
-			destroy()
-			if(myChart){
-	      myChart.destroy();
-	    }
-			var myChart = new Chart(ctx, {
+			if($scope.myChart !== undefined){
+				$scope.myChart.destroy();
+			}
+			$scope.myChart = new Chart(ctx, {
 			  type: $scope.radio,
 			  data: {
 			    labels: timeArr,
 			    datasets: [{
+			    	label: 'Temperature for '+vm.cityName,
 			      data: tempArr,
-			       backgroundColor: 'rgba(54, 162, 235, 0.7)',
+			       backgroundColor: [
+			       		'rgba(54, 162, 235, 0.6)',
+			       		'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 206, 86, 0.6)',
+                'rgba(75, 192, 192, 0.6)',
+                'rgba(153, 102, 255, 0.6)',
+                'rgba(255, 159, 64, 0.6)',
+                'rgba(220, 20, 60, 0.6)',
+                'rgba(0, 245, 255, 0.6)',
+                'rgba(255, 255, 0, 0.6)'],
 			      borderColor: 'rgba(54, 162, 235, 1)',
 			      borderWidth: 1
 			    }]
 			  },
 			  options: {
-			  	title: {
-            display: true,
-            text: 'Temperature for '+vm.cityName
-        	},
 			  	legend: {
-            display: false
+            display: true,
+            text: "legend"
         	},
 			    scales: {
 			      yAxes: [{
@@ -91,7 +98,6 @@ function requestToApi($scope, functionsService, serverService, $log, $timeout){
 			  }
 			});
 		});
-	// angular.copy(this.cityName,model.cityName);
 	};
 };
 
