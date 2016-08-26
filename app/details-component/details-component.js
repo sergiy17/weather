@@ -8,33 +8,33 @@ module.config(function(serverServiceProvider, $logProvider){
 function requestToApi($scope, functionsService, serverService, $log, $timeout){
 	var vm = this;
 	$scope.respData = {};
-		vm.weatherCond = "weather conditions";
-		vm.humidity = "humidity";
-		vm.windSpeed = "wind speed";
-		vm.stateP = functionsService.getStateP();
-		$scope.radio = "bar";
-		$scope.myChart = undefined;
-		var tempArr = [];
-		var timeArr = [];
+	vm.weatherCond = "weather conditions";
+	vm.humidity = "humidity";
+	vm.windSpeed = "wind speed";
+	vm.stateP = functionsService.getStateP();
+	$scope.radio = "bar";
+	$scope.myChart = undefined;
+	var tempArr = [];
+	var timeArr = [];
 
-		$log.debug("weatherLib.requestToApi");
-		$timeout(function(){
-			if(!vm.stateP.lon && !vm.stateP.cityId){
-				functionsService.getLocation().then(function(geoPosition){
-					vm.stateP.lat = geoPosition.lat;
-					vm.stateP.lon = geoPosition.lon;
-					serverService.getData(vm.stateP.lat, vm.stateP.lon, vm.stateP.cityId).then(function(weatherData){
-						parseData(weatherData);
-					});
-				});
-			}
-			else {
-				console.log("with cityId");
+	$log.debug("weatherLib.requestToApi");
+	$timeout(function(){
+		if(!vm.stateP.lon && !vm.stateP.cityId){
+			functionsService.getLocation().then(function(geoPosition){
+				vm.stateP.lat = geoPosition.lat;
+				vm.stateP.lon = geoPosition.lon;
 				serverService.getData(vm.stateP.lat, vm.stateP.lon, vm.stateP.cityId).then(function(weatherData){
 					parseData(weatherData);
 				});
-			}
-		});
+			});
+		}
+		else {
+			console.log("with cityId");
+			serverService.getData(vm.stateP.lat, vm.stateP.lon, vm.stateP.cityId).then(function(weatherData){
+				parseData(weatherData);
+			});
+		}
+	});
 	parseData = function(data){
 		vm.respData = data;
 	  vm.cityName =  vm.respData.city.name;
