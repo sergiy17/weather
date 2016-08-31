@@ -1,36 +1,26 @@
-//jshint strict: false
 module.exports = function(config) {
   config.set({
-
-    basePath: './app',
-
-    files: [
-      'bower_components/angular/angular.js',
-      'bower_components/angular-animate/angular-animate.js',
-      'bower_components/angular-resource/angular-resource.js',
-      'bower_components/angular-route/angular-route.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'components/**/*.js',
-      'view*/**/*.js'
-    ],
-
-    autoWatch: true,
-
+    basePath: '',
     frameworks: ['jasmine'],
-
-    browsers: ['Chrome'],
-
-    plugins: [
-      'karma-chrome-launcher',
-      'karma-firefox-launcher',
-      'karma-jasmine',
-      'karma-junit-reporter'
+    files: [
+      './node_modules/angular/angular.js',                             // angular
+      './node_modules/angular-ui-router/release/angular-ui-router.js', // ui-router
+      './node_modules/angular-mocks/angular-mocks.js',                 // loads our modules for tests
+      './app/app.js',                                
+      './app/cities-list/cities-list.js',
+      './app/cities-list/cities-list.spec.js'
     ],
-
-    junitReporter: {
-      outputFile: 'test_out/unit.xml',
-      suite: 'unit'
-    }
-
-  });
-};
+    exclude: [
+    ],
+    preprocessors: {
+    },
+    reporters: ['progress'],
+    port: 9876,
+    colors: true,
+    logLevel: config.LOG_INFO,
+    autoWatch: true,
+    browsers: ['Chrome'],
+    singleRun: false,
+    concurrency: Infinity
+  })
+}
