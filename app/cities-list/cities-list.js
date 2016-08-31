@@ -1,3 +1,5 @@
+(function(){
+	"use strict";
 var module = angular.module('weatherCity',['ngSanitize', 'MassAutoComplete', 'ui.router']);
 
 function fetchCities($http){
@@ -67,3 +69,5 @@ module.component("citiesList",{
 	controllerAs: "model",
 	controller: ["$http","$scope","$state","$log", citiesListController]
 });
+
+})();

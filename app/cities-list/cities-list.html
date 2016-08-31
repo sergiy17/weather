@@ -2,13 +2,11 @@
 	<div class="list-group cities-list">
   
   <form name="myForm" class="form-inline col-md-12">
-    <label >Select country:</label>
-    <select class="form-control" id="selectCountry" ng-model="model.currentCountry">
-      <option value="{{ someObj.country }}" ng-repeat="someObj in model.arrOfObj | unique:'country' ">{{ someObj.country }}</option>
-    </select>
   
   <div mass-autocomplete class="col-md-12">
-    <input name="chooseCity" ng-model="dirty.value" ng-pattern="/^[a-zA-Z]*$/" mass-autocomplete-item="autocomplete_options" placeholder="City name">
+    <label >Select city: </label><br>
+      <input name="chooseCity" ng-model="dirty.value" ng-pattern="/^[a-zA-Z]*$/" mass-autocomplete-item="autocomplete_options" placeholder="City name">
+    
     <p ng-show="myForm.chooseCity.$invalid">Only English</p>
     <div class="ac-container" ng-show="show_autocomplete && resCities.length" style="position:absolute;">
         <ul class="list-group ac-menu">
@@ -21,6 +19,7 @@
         </ul>
     </div>
   </div>
+  
   </form>
   <details-component></details-component>
   </div>

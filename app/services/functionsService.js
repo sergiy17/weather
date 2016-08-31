@@ -1,3 +1,5 @@
+(function(){
+	"use strict";
 var module = angular.module("weatherLib");
 
 module.service("functionsService",function($q,$stateParams,$log){
@@ -21,3 +23,5 @@ module.service("functionsService",function($q,$stateParams,$log){
 		}
 	}
 });
+
+})();

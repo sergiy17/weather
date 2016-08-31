@@ -1,9 +1,12 @@
+(function(){
+	"use strict";
+
 var infoModule = angular.module('weatherLib');
 
-infoWindowСontroller = function($scope, $stateParams,functionsService, $log){
+var infoWindowСontroller = function($scope, $stateParams,functionsService, $log){
 	var vm = this;
 
-	 setData = function(data){
+	var setData = function(data){
 	 	$log.debug("weatherLib.info-window.setData");
 		vm.arr4Temp = [];
 		vm.timeArr = [];
@@ -37,3 +40,5 @@ infoModule.component("infoWindow",{
 	},
 	controller: ["$scope", "$stateParams", "functionsService","$log",infoWindowСontroller]
 });
+
+})();

@@ -1,3 +1,6 @@
+(function(){
+	"use strict";
+
 var module = angular.module("weatherLib");
 
 module.config(function(serverServiceProvider, $logProvider){
@@ -18,27 +21,10 @@ function requestToApi($scope, functionsService, serverService, $log, $timeout){
 	var timeArr = [];
 
 	$log.debug("weatherLib.requestToApi");
-	$timeout(function(){
-		if(!vm.stateP.lon && !vm.stateP.cityId){
-			functionsService.getLocation().then(function(geoPosition){
-				vm.stateP.lat = geoPosition.lat;
-				vm.stateP.lon = geoPosition.lon;
-				serverService.getData(vm.stateP.lat, vm.stateP.lon, vm.stateP.cityId).then(function(weatherData){
-					parseData(weatherData);
-				});
-			});
-		}
-		else {
-			console.log("with cityId");
-			serverService.getData(vm.stateP.lat, vm.stateP.lon, vm.stateP.cityId).then(function(weatherData){
-				parseData(weatherData);
-			});
-		}
-	});
-	parseData = function(data){
+	
+	var parseData = function(data){
 		vm.respData = data;
 	  vm.cityName =  vm.respData.city.name;
-
 	  vm.arrOfObj = vm.respData.list.map(function(i){
 	    return i;
 	  });
@@ -99,6 +85,23 @@ function requestToApi($scope, functionsService, serverService, $log, $timeout){
 			});
 		});
 	};
+	$timeout(function(){
+		if(!vm.stateP.lon && !vm.stateP.cityId){
+			functionsService.getLocation().then(function(geoPosition){
+				vm.stateP.lat = geoPosition.lat;
+				vm.stateP.lon = geoPosition.lon;
+				serverService.getData(vm.stateP.lat, vm.stateP.lon, vm.stateP.cityId).then(function(weatherData){
+					parseData(weatherData);
+				});
+			});
+		}
+		else {
+			console.log("with cityId");
+			serverService.getData(vm.stateP.lat, vm.stateP.lon, vm.stateP.cityId).then(function(weatherData){
+				parseData(weatherData);
+			});
+		}
+	});
 };
 
 module.run(function($rootScope){
@@ -130,3 +133,5 @@ module.component("detailsComponent",{
 	},
 	templateUrl: "navigation.component.html"
 });
+
+})();

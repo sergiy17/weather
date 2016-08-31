@@ -1,8 +1,8 @@
 [
 {"_id":707860,"name":"Hurzuf","country":"UA","coord":{"lon":34.283333,"lat":44.549999}},
 {"_id":708546,"name":"Holubynka","country":"UA","coord":{"lon":33.900002,"lat":44.599998}},
-{"_id":703363,"name":"Laspi","country":"UA","coord":{"lon":33.733334,"lat":44.416668}},
-{"_id":713514,"name":"Alupka","country":"UA","coord":{"lon":34.049999,"lat":44.416668}},
+{"_id":703363,"name":"Holubynka","country":"UA","coord":{"lon":33.733334,"lat":44.416668}},
+{"_id":713514,"name":"Holubynka","country":"UA","coord":{"lon":34.049999,"lat":44.416668}},
 {"_id":690856,"name":"Tyuzler","country":"UA","coord":{"lon":34.083332,"lat":44.466667}},
 {"_id":707716,"name":"Il’ichëvka","country":"UA","coord":{"lon":34.383331,"lat":44.666668}},
 {"_id":697959,"name":"Partyzans’ke","country":"UA","coord":{"lon":34.083332,"lat":44.833332}},
