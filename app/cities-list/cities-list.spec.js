@@ -1,18 +1,26 @@
-describe('Cities-list component', function() {
+describe('component: cities-list', function() {
 
-	var controller, citiesListController;
+	var $componentController;
 
+
+	beforeEach(module("weatherCity"));
+	beforeEach(angular.mock.module("ngSanitize"));
+	beforeEach(angular.mock.module("MassAutoComplete"));
 	beforeEach(angular.mock.module("ui.router"));
-	beforeEach(angular.mock.module("weatherCity"));
 
-	beforeEach(inject(function(_$controller_){
-		$controller = _$controller_;
-		citiesListController = $controller("citiesListController", {});
+	beforeEach(inject(function(_$componentController_){
+		$componentController = _$componentController_;
+		// citiesListController = $controller("citiesListController", {});
 	}));
 
+	// console.log($componentController);
 
-  it("should exist", function(){
-  	expect(citiesListController).toBeDefined();
+  it("citiesListController should exist", function(){
+
+  	console.log($componentController);
+  	// var bindings = {hero: {name: 'Wolverine'}};
+  	var ctrl = $componentController('citiesListController', {});
+  	expect(ctrl).toBeDefined();
   });
 
 });
